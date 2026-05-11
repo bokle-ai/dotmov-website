@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <rect width="1920" height="1080" fill="#0a0a0b"/>
+  <text x="960" y="510" font-family="Georgia,serif" font-size="120" font-weight="400" fill="#1c1c21" text-anchor="middle" dominant-baseline="middle">DOTMOV</text>
+  <text x="960" y="620" font-family="monospace" font-size="22" fill="#2a2a32" text-anchor="middle" letter-spacing="8">SHOWREEL · 2026</text>
+  <text x="960" y="680" font-family="monospace" font-size="16" fill="#2a2a32" text-anchor="middle" letter-spacing="4">← replace with assets/hero/showreel.mp4 →</text>
+</svg>

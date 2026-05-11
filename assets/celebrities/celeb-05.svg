@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#2d1b69"/>
+  <polygon points="0,0 200,0 0,200" fill="#e8c270" opacity="0.12"/>
+  <polygon points="600,600 400,600 600,400" fill="#e8c270" opacity="0.12"/>
+  <!-- Camera icon -->
+  <rect x="200" y="210" width="200" height="150" rx="12" fill="none" stroke="#e8c270" stroke-width="6"/>
+  <circle cx="300" cy="285" r="45" fill="none" stroke="#e8c270" stroke-width="5"/>
+  <circle cx="300" cy="285" r="28" fill="#e8c270" opacity="0.3"/>
+  <rect x="270" y="198" width="60" height="20" rx="6" fill="#e8c270" opacity="0.6"/>
+  <circle cx="370" cy="230" r="10" fill="#e8c270" opacity="0.5"/>
+  <!-- Label bar -->
+  <rect x="0" y="510" width="600" height="90" fill="#e8c270" opacity="0.15"/>
+  <text x="300" y="552" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="18" fill="#e8c270" letter-spacing="2">ALLU ARJUN EVENT</text>
+  <text x="300" y="580" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="12" fill="#e8c270" opacity="0.6">DOTMOV EVENT STILL</text>
+</svg>

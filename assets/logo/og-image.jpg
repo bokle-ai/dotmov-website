@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#1a1b4b"/>
+  <polygon points="900,0 1200,0 1200,630" fill="#0f1035" opacity="0.6"/>
+  <polygon points="0,630 400,630 0,200" fill="#0f1035" opacity="0.4"/>
+  <text x="600" y="260" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="96" fill="#d4a642" letter-spacing="4">.MOV</text>
+  <text x="600" y="340" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="28" fill="#ffffff" letter-spacing="2">Building Brand Authority Through Visual Storytelling</text>
+  <text x="600" y="400" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="20" fill="#d4a642" letter-spacing="4">DOTMOV.IN · CHENNAI</text>
+</svg>

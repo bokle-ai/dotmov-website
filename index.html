@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DotMov | Building Brand Authority Through Powerful Visual Storytelling</title>
+  <meta name="description" content="Chennai-based video production studio helping founders and brands build authority through strategic personal branding content. 100+ events · 50+ brands.">
+  <meta property="og:title" content="DotMov: Brand Authority Through Visual Storytelling">
+  <meta property="og:description" content="We produce video content that brings clients, not just attention.">
+  <meta property="og:image" content="assets/logo/og-image.jpg">
+  <meta property="og:url" content="https://dotmov.in">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/logo/favicon.ico">
+  <link rel="canonical" href="https://dotmov.in">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Organization","LocalBusiness"],
+    "name": "DotMov",
+    "description": "Chennai-based video production studio helping founders and brands build authority through strategic personal branding content.",
+    "url": "https://dotmov.in",
+    "logo": "https://dotmov.in/assets/logo/logo-fetched-1.png",
+    "telephone": "+919943111944",
+    "email": "raswanthjagan@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chennai",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "sameAs": ["https://instagram.com/dotmov.in","https://wa.me/919943111944"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MOBILE NAV OVERLAY
+════════════════════════════════════════════════════════════════ -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <a href="index.html"   class="mobile-nav-link"><span class="mobile-nav-label">Home</span></a>
+  <a href="work.html"    class="mobile-nav-link"><span class="mobile-nav-label">Work</span></a>
+  <a href="services.html"class="mobile-nav-link"><span class="mobile-nav-label">Services</span></a>
+  <a href="pricing.html" class="mobile-nav-link"><span class="mobile-nav-label">Pricing</span></a>
+  <a href="about.html"   class="mobile-nav-link"><span class="mobile-nav-label">Studio</span></a>
+  <a href="contact.html" class="btn-primary mobile-nav-cta">Book a Call <span class="btn-arrow">→</span></a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" aria-label="DotMov home">
+        <img src="assets/logo/logo-fetched-1.png" alt="DotMov" height="36" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="logo-text" style="display:none"><span class="logo-dot">.</span>MOV</span>
+      </a>
+      <nav class="navbar-nav" aria-label="Main navigation">
+        <a href="work.html">WORKS</a>
+        <a href="about.html">STUDIO</a>
+        <a href="services.html">METHOD</a>
+        <a href="pricing.html">PRICING</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+      <div class="navbar-cta-wrap">
+        <a href="contact.html" class="btn-primary navbar-cta">Book a Call <span class="btn-arrow">→</span></a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (00) HERO
+════════════════════════════════════════════════════════════════ -->
+<section class="hero" id="home" aria-label="DotMov — Video Production Studio">
+
+  <!-- Background video — replace src with showreel.mp4 when ready -->
+  <!-- ASSET SPEC: 16:9 horizontal · min 1920×1080 · ideally 4K · 10-20s · MP4 H.264 · max 8MB · no audio · seamlessly loopable · save as assets/hero/showreel.mp4 -->
+  <video class="hero-video" autoplay muted loop playsinline
+         poster="assets/hero/poster.jpg"
+         aria-label="DotMov showreel — cinematic video production in Chennai">
+    <source src="assets/hero/showreel.mp4" type="video/mp4">
+  </video>
+
+  <!-- Gradient overlay -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Film grain SVG texture -->
+  <svg class="hero-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+
+  <!-- Content -->
+  <div class="hero-content-wrap">
+    <div class="container">
+      <div class="hero-content">
+
+        <!-- Section label -->
+        
+
+        <!-- Headline — word-by-word reveal driven by JS -->
+        <h1 class="hero-headline" id="heroHeadline" aria-label="Your competitors are posting. You should be closing.">
+          <!-- Words injected by JS for word-by-word reveal -->
+          Your competitors are posting.<br>
+          You should be <em>closing.</em>
+        </h1>
+
+        <p class="hero-sub">
+          Video content engineered to build authority
+          and convert followers into paying clients.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn-primary">
+            Book a Strategy Call <span class="btn-arrow">→</span>
+          </a>
+          <a href="work.html" class="btn-ghost" style="color:rgba(247,245,240,0.8);">
+            See Our Work <span class="btn-arrow">→</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll-indicator" aria-hidden="true">
+    <span class="hero-scroll-text">SCROLL</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+
+  <!-- Now Playing credit -->
+  <div class="hero-now-playing" aria-hidden="true">
+    <span class="hero-now-playing-label">NOW PLAYING</span>
+    <span class="hero-now-playing-title">DotMov Reel &middot; 2026</span>
+    <span class="hero-now-playing-time">01:24 / 01:24</span>
+  </div>
+
+  <!-- Brand logo strip — auto-scrolling marquee inside hero viewport -->
+  <div class="hero-brand-strip" aria-label="Trusted by India's leading brands">
+    <span class="hero-brand-label">Trusted by India's Leading Brands</span>
+    <div class="hero-brand-marquee-wrap">
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-logo"><img src="assets/clients/adidas.svg" alt="Adidas"></div>
+        <div class="marquee-logo"><img src="assets/clients/zoho.svg" alt="Zoho"></div>
+        <div class="marquee-logo"><img src="assets/clients/joyalukkas.svg" alt="Joyalukkas"></div>
+        <div class="marquee-logo"><img src="assets/clients/naturals.png" alt="Naturals Salon"></div>
+        <div class="marquee-logo"><img src="assets/clients/chennai-freelancers.svg" alt="Chennai Freelancers Club"></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="marquee-logo"><img src="assets/clients/adidas.svg" alt="Adidas"></div>
+        <div class="marquee-logo"><img src="assets/clients/zoho.svg" alt="Zoho"></div>
+        <div class="marquee-logo"><img src="assets/clients/joyalukkas.svg" alt="Joyalukkas"></div>
+        <div class="marquee-logo"><img src="assets/clients/naturals.png" alt="Naturals Salon"></div>
+        <div class="marquee-logo"><img src="assets/clients/chennai-freelancers.svg" alt="Chennai Freelancers Club"></div>
+        <!-- third set keeps it full-width at all viewport sizes -->
+        <div class="marquee-logo"><img src="assets/clients/adidas.svg" alt="Adidas"></div>
+        <div class="marquee-logo"><img src="assets/clients/zoho.svg" alt="Zoho"></div>
+        <div class="marquee-logo"><img src="assets/clients/joyalukkas.svg" alt="Joyalukkas"></div>
+        <div class="marquee-logo"><img src="assets/clients/naturals.png" alt="Naturals Salon"></div>
+        <div class="marquee-logo"><img src="assets/clients/chennai-freelancers.svg" alt="Chennai Freelancers Club"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (02) STATS TRACK RECORD
+════════════════════════════════════════════════════════════════ -->
+<section class="stats-section section-dark">
+  <div class="container">
+    <div class="stats-header reveal">
+      
+      <h2>The numbers behind<br><em>the work.</em></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-block reveal reveal-delay-1">
+        <span class="stat-number" data-count="5000" data-suffix="+">5,000+</span>
+        <span class="stat-label">Reels Delivered</span>
+      </div>
+      <div class="stat-block reveal reveal-delay-2">
+        <span class="stat-number" data-count="25" data-suffix="+">25+</span>
+        <span class="stat-label">Founders Rebranded</span>
+      </div>
+      <div class="stat-block reveal reveal-delay-3">
+        <span class="stat-number" data-count="100" data-suffix="+">100+</span>
+        <span class="stat-label">Events Covered</span>
+      </div>
+      <div class="stat-block reveal reveal-delay-4">
+        <span class="stat-number" data-count="50" data-suffix="+">50+</span>
+        <span class="stat-label">Brand Partners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (03) CELEBRITY GRID — horizontal scroll strip
+════════════════════════════════════════════════════════════════ -->
+<section class="celeb-section" id="celebSection">
+  <div class="celeb-header reveal">
+    <div class="container" style="padding:0 var(--gutter);">
+      
+      <h2>We've been there.<br>Every time it <em>mattered.</em></h2>
+      <p style="color:var(--text-on-dark-mut);font-size:1.0625rem;margin-top:1rem;max-width:560px;">
+        From India's biggest stages to intimate brand launches,
+        every frame is a credential.
+      </p>
+    </div>
+  </div>
+
+  <!-- Progress bar + counter -->
+  <div class="celeb-controls">
+    <div class="celeb-progress-bar" id="celebProgress">
+      <div class="celeb-progress-fill" id="celebProgressFill"></div>
+    </div>
+    <span class="celeb-counter" id="celebCounter">001 / 013</span>
+  </div>
+
+  <!-- Horizontal scroll strip -->
+  <div class="celeb-strip-wrap" id="celebStrip" aria-label="Celebrity event portfolio, scroll to view">
+    <div class="celeb-strip">
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/ar-rahman.jpg" alt="A.R. Rahman live performance" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">A.R. Rahman</span>
+          <span class="celeb-sub">Live concert &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/kamal-hassan.jpg" alt="Kamal Haasan event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Kamal Haasan</span>
+          <span class="celeb-sub">Brand event &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/rashmika-mandanna.jpg" alt="Rashmika Mandanna event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Rashmika Mandanna</span>
+          <span class="celeb-sub">Brand event &middot; Bengaluru</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/dhanush.jpg" alt="Dhanush film launch" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Dhanush</span>
+          <span class="celeb-sub">Film launch &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/nagarjuna.jpg" alt="Nagarjuna stage event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Nagarjuna</span>
+          <span class="celeb-sub">Stage event</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/yuvan-shankar-raja.jpg" alt="Yuvan Shankar Raja" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Yuvan Shankar Raja</span>
+          <span class="celeb-sub">Music event &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/allu-arjun.jpg" alt="Allu Arjun Pushpa 2 event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Allu Arjun</span>
+          <span class="celeb-sub">Pushpa 2 launch event</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/silambarasan-tr.jpg" alt="Silambarasan TR event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Silambarasan TR</span>
+          <span class="celeb-sub">Stage event &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/trisha-krishnan.jpg" alt="Trisha Krishnan event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Trisha Krishnan</span>
+          <span class="celeb-sub">Brand event</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/karthi.jpg" alt="Karthi event" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Karthi</span>
+          <span class="celeb-sub">Film event &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/sanju-samson.jpg" alt="Sanju Samson" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Sanju Samson</span>
+          <span class="celeb-sub">Brand event</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/kennet-alphy.png" alt="Kennet Alphy" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Kennet Alphy</span>
+          <span class="celeb-sub">Stage event</span>
+        </figcaption>
+      </figure>
+
+      <figure class="celeb-figure">
+        <img src="assets/celebrities/dharaneetharan.png" alt="Dharaneetharan" loading="lazy">
+        <div class="celeb-figure-overlay" aria-hidden="true"></div>
+        <figcaption class="celeb-figure-caption">
+          
+          <span class="celeb-name">Dharaneetharan</span>
+          <span class="celeb-sub">Brand event &middot; Chennai</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+
+  <span class="celeb-caption">Every frame is a credential.</span>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (04) CLIENT RESULTS — phone mockup showcase
+════════════════════════════════════════════════════════════════ -->
+<section class="cases-section">
+  <div class="container">
+
+    <div class="cases-header reveal">
+      <h2>Content that converts.<br><em>Every single time.</em></h2>
+      <p>Real brands. Real founders. Real revenue — not vanity metrics.</p>
+    </div>
+
+    <div class="cases-showcase reveal reveal-delay-1">
+
+      <!-- ── Phone mockup column ── -->
+      <div class="cases-phone-col">
+
+        <!-- Tilt interaction zone -->
+        <div class="phone-tilt-zone" id="phoneTiltZone">
+
+          <!-- Floating wrapper (CSS bob animation) -->
+          <div class="phone-float-wrap">
+
+            <!-- Ground shadow (shifts with tilt) -->
+            <div class="phone-ground-shadow" id="phoneGroundShadow" aria-hidden="true"></div>
+
+            <!-- The actual phone frame -->
+            <div class="phone-frame" id="phoneFrame">
+
+              <!-- Side buttons -->
+              <div class="phone-side-btn phone-side-vol-up" aria-hidden="true"></div>
+              <div class="phone-side-btn phone-side-vol-dn" aria-hidden="true"></div>
+              <div class="phone-side-btn phone-side-power"  aria-hidden="true"></div>
+
+              <!-- Dynamic Island -->
+              <div class="phone-dynamic-island" aria-hidden="true"></div>
+
+              <!-- Screen -->
+              <div class="phone-screen">
+                <video
+                  id="casesVideo"
+                  autoplay muted loop playsinline
+                  aria-label="Client personal branding reel">
+                  <source src="assets/clients/parampara-dhothis.mp4" type="video/mp4">
+                </video>
+
+                <!-- Reel-style UI overlay -->
+                <div class="reel-ui" aria-hidden="true">
+
+                  <!-- Story progress bar at top -->
+                  <div class="reel-progress-track">
+                    <div class="reel-bar reel-bar--done"></div>
+                    <div class="reel-bar reel-bar--active">
+                      <div class="reel-bar-fill" id="reelBarFill"></div>
+                    </div>
+                    <div class="reel-bar"></div>
+                  </div>
+
+                  <!-- Top right DotMov logo -->
+                  <div class="reel-brand">.MOV</div>
+
+                  <!-- Bottom row -->
+                  <div class="reel-bottom">
+                    <div class="reel-user">
+                      <div class="reel-avatar">V</div>
+                      <div class="reel-user-text">
+                        <div class="reel-handle">@vinothkumar</div>
+                        <div class="reel-caption">Premium brand content 🎬</div>
+                      </div>
+                    </div>
+                    <div class="reel-actions">
+                      <button class="reel-btn" id="phonePlayBtn" title="Play / Pause">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" id="reelPlayIcon"><polygon points="6,3 20,12 6,21"/></svg>
+                      </button>
+                      <div class="reel-btn reel-btn--like">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                        <span class="reel-count">12.4K</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!-- /.reel-ui -->
+
+                <!-- Glass glare overlay -->
+                <div class="phone-glare" id="phoneGlare" aria-hidden="true"></div>
+
+              </div><!-- /.phone-screen -->
+
+              <!-- Home indicator -->
+              <div class="phone-home-bar" aria-hidden="true"></div>
+
+            </div><!-- /.phone-frame -->
+          </div><!-- /.phone-float-wrap -->
+        </div><!-- /.phone-tilt-zone -->
+
+        <!-- Client selector tabs -->
+        <div class="cases-switcher" role="tablist" aria-label="Client case studies">
+          <button class="case-switch-btn active" data-case="1" role="tab" aria-selected="true">
+            <span class="csb-line"></span>
+            <span class="csb-label">Parampara Dhothis</span>
+          </button>
+          <button class="case-switch-btn" data-case="2" role="tab" aria-selected="false" disabled>
+            <span class="csb-line"></span>
+            <span class="csb-label">Coming Soon</span>
+          </button>
+          <button class="case-switch-btn" data-case="3" role="tab" aria-selected="false" disabled>
+            <span class="csb-line"></span>
+            <span class="csb-label">Coming Soon</span>
+          </button>
+        </div>
+
+      </div><!-- /.cases-phone-col -->
+
+      <!-- ── Client content column ── -->
+      <div class="cases-content-col">
+
+        <!-- Case 1: Parampara Dhothis -->
+        <div class="case-info active" id="ci-1" data-case="1">
+          <span class="case-service-tag">Personal Branding</span>
+          <blockquote class="case-quote">
+            &ldquo;My brand finally looked as premium as my product. The content spoke for itself — customers started coming to us.&rdquo;
+          </blockquote>
+          <p class="case-attribution">VINOTH KUMAR &middot; FOUNDER, PARAMPARA DHOTHIS</p>
+          <div class="case-stats-dark">
+            <div class="csd-stat">
+              <span class="csd-value">3×</span>
+              <span class="csd-label">Inbound inquiries, Month 1</span>
+            </div>
+            <div class="csd-stat">
+              <span class="csd-value">ROI</span>
+              <span class="csd-label">Immediate return on personal branding investment</span>
+            </div>
+          </div>
+          <a href="work.html" class="btn-ghost" style="color:var(--text-on-dark);">
+            See All Case Studies <span class="btn-arrow">→</span>
+          </a>
+        </div>
+
+        <!-- Case 2: placeholder -->
+        <div class="case-info" id="ci-2" data-case="2">
+          <span class="case-service-tag">Personal Branding</span>
+          <blockquote class="case-quote case-quote--muted">
+            &ldquo;This client story is being documented.<br>Check back soon.&rdquo;
+          </blockquote>
+          <p class="case-attribution" style="opacity:0.4;">DOTMOV &middot; UPCOMING CLIENT</p>
+        </div>
+
+        <!-- Case 3: placeholder -->
+        <div class="case-info" id="ci-3" data-case="3">
+          <span class="case-service-tag">Personal Branding</span>
+          <blockquote class="case-quote case-quote--muted">
+            &ldquo;This client story is being documented.<br>Check back soon.&rdquo;
+          </blockquote>
+          <p class="case-attribution" style="opacity:0.4;">DOTMOV &middot; UPCOMING CLIENT</p>
+        </div>
+
+      </div>
+    </div><!-- /.cases-showcase -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (05) WHY DOTMOV — compact 3-column card grid
+════════════════════════════════════════════════════════════════ -->
+<section class="why-section">
+  <div class="container">
+
+    <div class="why-section-header reveal">
+      <h2>Your competitors aren't waiting.<br><em>Here's why you shouldn't either.</em></h2>
+    </div>
+
+    <div class="why-grid" id="whyGrid">
+
+      <article class="why-card">
+        <div class="why-card-top">
+          <span class="why-card-num">01</span>
+          <span class="why-card-tag">The Problem</span>
+        </div>
+        <h3 class="why-card-headline">You're invisible.<br>And you're <em>losing deals</em> because of it.</h3>
+        <p class="why-card-body">In 2026, your personal brand is your pipeline. If they can't find you, they can't trust you.</p>
+        <ul class="why-card-list">
+          <li>You post inconsistently, so the algorithm buries you</li>
+          <li>Your content looks cheap, so prospects skip past you</li>
+          <li>You have no clear story, so no one remembers you</li>
+          <li>Your competitors are building authority while you wait</li>
+        </ul>
+      </article>
+
+      <article class="why-card">
+        <div class="why-card-top">
+          <span class="why-card-num">02</span>
+          <span class="why-card-tag">The Solution</span>
+        </div>
+        <h3 class="why-card-headline">We don't make content.<br>We build <em>category leaders.</em></h3>
+        <p class="why-card-body">A content system that positions you as the authority and runs without burning you out.</p>
+        <ul class="why-card-list">
+          <li>Brand built around your expertise, not just aesthetics</li>
+          <li>Content system that runs without burning you out</li>
+          <li>Premium video that signals premium pricing</li>
+          <li>Outcomes tracked: leads, DMs, revenue</li>
+        </ul>
+      </article>
+
+      <article class="why-card">
+        <div class="why-card-top">
+          <span class="why-card-num">03</span>
+          <span class="why-card-tag">The Outcome</span>
+        </div>
+        <h3 class="why-card-headline">Inbound leads.<br>Premium pricing.<br><em>Category authority.</em></h3>
+        <p class="why-card-body">What DotMov clients experience after 90 days of systematic content.</p>
+        <ul class="why-card-list">
+          <li>Engagement that compounds month over month</li>
+          <li>Inbound leads from warm prospects every week</li>
+          <li>&#8377;50L+ in revenue generated through content</li>
+          <li>A brand that commands premium pricing</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (06) FOUNDER SPOTLIGHT
+════════════════════════════════════════════════════════════════ -->
+<section class="founder-section section-light">
+  <div class="container">
+    <div class="founder-grid">
+
+      <div class="reveal">
+        <span class="founder-img-label">Meet the Director</span>
+        <img
+          src="assets/founder/raswanth.jpg"
+          alt="Raswanth, Founder and Director of DotMov — Video Producer and Personal Branding Strategist in Chennai"
+          class="founder-portrait"
+          loading="lazy"
+        >
+        <div class="founder-credentials">
+          <span class="founder-cred">5K+ REELS</span>
+          <span class="founder-cred">25+ FOUNDERS</span>
+          <span class="founder-cred">&#8377;50L+ REVENUE</span>
+          <span class="founder-cred">100+ EVENTS</span>
+        </div>
+      </div>
+
+      <div class="founder-content reveal reveal-delay-2">
+        
+        <h2>Raswanth<em>.</em></h2>
+        <span class="founder-title">Founder &middot; DotMov Studio</span>
+
+        <div class="founder-bullets">
+          <div class="founder-bullet">Video Producer &amp; Personal Branding Strategist</div>
+          <div class="founder-bullet">Produced 5,000+ reels across brands and celebrities</div>
+          <div class="founder-bullet">Helped 25+ entrepreneurs build category authority</div>
+          <div class="founder-bullet">Generated &#8377;50L+ in client revenue through video content</div>
+        </div>
+
+        <blockquote class="founder-pull-quote">
+          <span class="quote-mark-open" aria-hidden="true">&ldquo;</span>
+          Every founder I work with has something worth saying. Most just don't have the content infrastructure to say it at scale. That's what DotMov builds.
+          <span class="quote-mark-close" aria-hidden="true">&rdquo;</span>
+        </blockquote>
+
+        <a href="contact.html" class="btn-primary">Work Directly With Raswanth <span class="btn-arrow">→</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (07) METHODOLOGY — interactive tabbed steps
+════════════════════════════════════════════════════════════════ -->
+<section class="method-section" id="method">
+  <div class="container">
+
+    <div class="method-header reveal">
+      <h2>How a category leader<br>gets <em>built.</em></h2>
+    </div>
+
+    <div class="method-tabs-ui reveal reveal-delay-1">
+
+      <!-- Tab row -->
+      <div class="method-tab-row" role="tablist" aria-label="Our methodology steps">
+        <button class="method-tab-btn active" data-step="1" role="tab" aria-selected="true" aria-controls="mp-1">
+          <span class="mtb-num">01</span>
+          <span class="mtb-name">Strategy</span>
+        </button>
+        <button class="method-tab-btn" data-step="2" role="tab" aria-selected="false" aria-controls="mp-2">
+          <span class="mtb-num">02</span>
+          <span class="mtb-name">Production</span>
+        </button>
+        <button class="method-tab-btn" data-step="3" role="tab" aria-selected="false" aria-controls="mp-3">
+          <span class="mtb-num">03</span>
+          <span class="mtb-name">Distribution</span>
+        </button>
+        <button class="method-tab-btn" data-step="4" role="tab" aria-selected="false" aria-controls="mp-4">
+          <span class="mtb-num">04</span>
+          <span class="mtb-name">Growth</span>
+        </button>
+        <button class="method-tab-btn" data-step="5" role="tab" aria-selected="false" aria-controls="mp-5">
+          <span class="mtb-num">05</span>
+          <span class="mtb-name">Iteration</span>
+        </button>
+      </div>
+
+      <!-- Content panels -->
+      <div class="method-panel-wrap">
+        <div class="method-panel active" id="mp-1" role="tabpanel" aria-labelledby="">
+          <div class="mp-num">01</div>
+          <div class="mp-body">
+            <h3 class="mp-title">Strategy</h3>
+            <p class="mp-desc">Position you as the authority in your category. Deep audience research, razor-sharp content angles, and a brand story your market can't ignore — built before a single frame is shot.</p>
+            <div class="mp-tags">
+              <span>Audience Research</span><span>Brand Positioning</span><span>Content Architecture</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-panel" id="mp-2" role="tabpanel">
+          <div class="mp-num">02</div>
+          <div class="mp-body">
+            <h3 class="mp-title">Production</h3>
+            <p class="mp-desc">Premium video, end-to-end. We handle scripting, shooting, editing, and colour grading. You show up. We make you look like the authority you are.</p>
+            <div class="mp-tags">
+              <span>Scripting</span><span>Cinematography</span><span>Editing &amp; Grading</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-panel" id="mp-3" role="tabpanel">
+          <div class="mp-num">03</div>
+          <div class="mp-body">
+            <h3 class="mp-title">Distribution</h3>
+            <p class="mp-desc">Platform-native formats that perform. Right content, right platform, right time — published consistently every single week so the algorithm works for you, not against you.</p>
+            <div class="mp-tags">
+              <span>Multi-platform Rollout</span><span>Scheduling</span><span>Algorithm Optimization</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-panel" id="mp-4" role="tabpanel">
+          <div class="mp-num">04</div>
+          <div class="mp-body">
+            <h3 class="mp-title">Growth</h3>
+            <p class="mp-desc">Turn audience into revenue. Paid amplification, funnel building, and performance tracking tied to real outcomes — not vanity metrics like views and likes.</p>
+            <div class="mp-tags">
+              <span>Paid Amplification</span><span>Funnel Building</span><span>Revenue Tracking</span>
+            </div>
+          </div>
+        </div>
+        <div class="method-panel" id="mp-5" role="tabpanel">
+          <div class="mp-num">05</div>
+          <div class="mp-body">
+            <h3 class="mp-title">Iteration</h3>
+            <p class="mp-desc">Double down on what's working. Monthly content reviews, performance analysis, and continuous sharpening of your content edge — so you get stronger every cycle, not stagnant.</p>
+            <div class="mp-tags">
+              <span>Monthly Reviews</span><span>Performance Analysis</span><span>Continuous Optimization</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (08) PRICING — dark section
+════════════════════════════════════════════════════════════════ -->
+<!-- TODO: confirm with Raswanth whether pricing is monthly retainer or per-package one-time. v1 was edited to "/mo" without confirmation. -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="pricing-header reveal">
+      
+      <h2 style="color:var(--text-on-dark)">Investment that pays<br>for <em>itself.</em></h2>
+      <p style="color:var(--text-on-dark-mut);font-size:1.0625rem;margin-top:1rem;max-width:560px;">Every package is built around one goal: generating more in revenue than it costs you.</p>
+    </div>
+
+    <div class="pricing-grid reveal">
+
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="pricing-card-inner">
+          <span class="pricing-name">Starter</span>
+          <div class="pricing-price">
+            <span class="pricing-price-sym">&#8377;</span>35,000
+            <span class="pricing-price-freq">/ MO</span>
+          </div>
+          <p class="pricing-desc">For founders ready to get their first content system in place.</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> 8 high-quality videos / month</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Full end-to-end production</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Basic script writing</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Distribution support</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> 5 branded poster designs</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Content strategy session</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Market &amp; audience research</div>
+          </div>
+          <p class="pricing-best-for">Best for founders just launching their content presence</p>
+          <a href="contact.html" class="btn-ghost">Start Project <span class="btn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Elite — FEATURED / most popular -->
+      <div class="pricing-card featured">
+        <span class="pricing-ribbon" aria-label="Most popular">MOST POPULAR</span>
+        <div class="pricing-card-inner">
+          <span class="pricing-name" style="color:var(--text-on-light-mut)">Elite</span>
+          <div class="pricing-price" style="color:var(--navy)">
+            <span class="pricing-price-sym">&#8377;</span>75,000
+            <span class="pricing-price-freq" style="color:var(--text-on-light-mut)">/ MO</span>
+          </div>
+          <p class="pricing-desc" style="color:var(--text-on-light-mut)">For founders serious about becoming a category authority, fast.</p>
+          <div class="pricing-divider" style="background:var(--line-light)"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> 10 high-quality videos / month</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> Full end-to-end production</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> Refined script writing &amp; positioning</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> Full distribution, scheduling &amp; posting</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> 5 branded poster designs</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> Advanced content strategy</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> Deep market &amp; competitor research</div>
+            <div class="pricing-feature" style="color:var(--text-on-light-mut)"><span class="pricing-feature-mark" style="color:var(--navy)">+</span> Priority turnaround &amp; dedicated account</div>
+          </div>
+          <p class="pricing-best-for" style="color:var(--text-on-light-mut);border-top-color:var(--line-light)">Best for founders scaling or launching a new vertical</p>
+          <a href="contact.html" class="btn-primary">Start Project <span class="btn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card">
+        <div class="pricing-card-inner">
+          <span class="pricing-name">Pro</span>
+          <div class="pricing-price">
+            <span class="pricing-price-sym">&#8377;</span>50,000
+            <span class="pricing-price-freq">/ MO</span>
+          </div>
+          <p class="pricing-desc">For founders going all-in on content volume and brand momentum.</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> 12 high-quality videos / month</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Full end-to-end production</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Advanced script writing &amp; frameworks</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Full distribution multi-platform rollout</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> 5 branded poster designs</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Strategy with monthly performance reviews</div>
+            <div class="pricing-feature"><span class="pricing-feature-mark">+</span> Market research &amp; ongoing optimisation</div>
+          </div>
+          <p class="pricing-best-for">Best for founders ready to dominate their category</p>
+          <a href="contact.html" class="btn-ghost">Start Project <span class="btn-arrow">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (09) CLIENT RESULTS / TESTIMONIALS
+════════════════════════════════════════════════════════════════ -->
+<!-- TODO: Replace testimonial names and quotes with verified client responses before publishing. These are placeholders. -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      
+      <h2>What founders say after<br><em>six months</em> with us.</h2>
+    </div>
+
+    <div class="testimonials-list">
+
+      <div class="testimonial-block">
+        <span class="testimonial-mark" aria-hidden="true">&ldquo;</span>
+        <p class="testimonial-quote-text">
+          3 qualified leads in the first month. The ROI was <em>immediate.</em>
+        </p>
+        <div class="testimonial-divider" aria-hidden="true"></div>
+        <span class="testimonial-author-name">PRIYA K.</span>
+        <span class="testimonial-author-role">FOUNDER &middot; SKILLTRIBE</span>
+        <img src="assets/testimonials/avatar-01.svg" alt="Priya K." class="testimonial-avatar-img" loading="lazy">
+      </div>
+
+      <div class="testimonial-block">
+        <span class="testimonial-mark" aria-hidden="true">&ldquo;</span>
+        <p class="testimonial-quote-text">
+          4,000 new followers and two enterprise inquiries <em>directly from our reels</em> in six weeks.
+        </p>
+        <div class="testimonial-divider" aria-hidden="true"></div>
+        <span class="testimonial-author-name">RAHUL M.</span>
+        <span class="testimonial-author-role">CEO &middot; MAKERSTRIBE</span>
+        <img src="assets/testimonials/avatar-02.svg" alt="Rahul M." class="testimonial-avatar-img" loading="lazy">
+      </div>
+
+      <div class="testimonial-block">
+        <span class="testimonial-mark" aria-hidden="true">&ldquo;</span>
+        <p class="testimonial-quote-text">
+          Our founder's personal brand went from zero to 12K followers in two months. We get DMs asking to work with us <em>every week.</em>
+        </p>
+        <div class="testimonial-divider" aria-hidden="true"></div>
+        <span class="testimonial-author-name">SANJAY T.</span>
+        <span class="testimonial-author-role">CEO &middot; TECHPILOT</span>
+        <img src="assets/testimonials/avatar-03.svg" alt="Sanjay T." class="testimonial-avatar-img" loading="lazy">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (10) INSTAGRAM / JOURNAL
+════════════════════════════════════════════════════════════════ -->
+<section class="journal-section section-light">
+  <div class="container">
+    <div class="journal-header reveal">
+      
+      <h2>Behind every reel<br>a <em>strategy.</em></h2>
+      <p style="color:var(--text-on-light-mut);font-size:1.0625rem;margin-top:0.75rem;">Behind-the-scenes, client work, and content strategy on Instagram.</p>
+    </div>
+  </div>
+
+  <!-- TODO: replace ig-01.svg through ig-06.svg with real Instagram post screenshots -->
+  <a href="https://instagram.com/dotmov.in" target="_blank" rel="noopener noreferrer" aria-label="View DotMov on Instagram">
+    <div class="journal-strip">
+      <div class="ig-tile">
+        <img src="assets/instagram/ig-01.svg" alt="DotMov Instagram — Brand Story" loading="lazy">
+        
+        <div class="ig-tile-play" aria-hidden="true">
+          <div class="ig-play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="ig-tile">
+        <img src="assets/instagram/ig-02.svg" alt="DotMov Instagram — Event Reel" loading="lazy">
+        
+        <div class="ig-tile-play" aria-hidden="true">
+          <div class="ig-play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="ig-tile">
+        <img src="assets/instagram/ig-03.svg" alt="DotMov Instagram — Founder Frame" loading="lazy">
+        
+        <div class="ig-tile-play" aria-hidden="true">
+          <div class="ig-play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="ig-tile">
+        <img src="assets/instagram/ig-04.svg" alt="DotMov Instagram — Product Drop" loading="lazy">
+        
+        <div class="ig-tile-play" aria-hidden="true">
+          <div class="ig-play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="ig-tile">
+        <img src="assets/instagram/ig-05.svg" alt="DotMov Instagram — Authority Content" loading="lazy">
+        
+        <div class="ig-tile-play" aria-hidden="true">
+          <div class="ig-play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="ig-tile">
+        <img src="assets/instagram/ig-06.svg" alt="DotMov Instagram — Behind The Lens" loading="lazy">
+        
+        <div class="ig-tile-play" aria-hidden="true">
+          <div class="ig-play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <div class="container" style="margin-top:2.5rem;">
+    <a href="https://instagram.com/dotmov.in" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="color:var(--text-on-light)">
+      Follow @dotmov.in <span class="btn-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     (11) FINAL CTA BAND
+════════════════════════════════════════════════════════════════ -->
+<section class="cta-band" id="contact">
+
+  <!-- Grain overlay -->
+  <svg class="cta-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="ctaGrain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#ctaGrain)"/>
+  </svg>
+
+  
+  <div class="cta-band-line" aria-hidden="true"></div>
+  <h2 class="cta-band-headline reveal">
+    Your competitors aren't<br>waiting. Neither<br>should <em>you.</em>
+  </h2>
+  <a href="contact.html" class="btn-primary reveal" style="font-size:1.0625rem;padding:20px 40px;">
+    Book a Strategy Call <span class="btn-arrow">→</span>
+  </a>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+
+  <!-- Massive wordmark watermark -->
+  <div class="footer-wordmark" aria-hidden="true">
+    <span class="footer-wordmark-text">DOTMOV</span>
+  </div>
+
+  <!-- Column grid -->
+  <div class="footer-cols">
+
+    <div class="footer-brand-col">
+      <span class="footer-logo-text"><span class="footer-logo-dot">.</span>MOV</span>
+      <p class="footer-tagline">Building Brand Authority Through Visual Storytelling. Chennai's video production studio for founders who are serious about growth.</p>
+      <div class="footer-socials">
+        <a href="https://instagram.com/dotmov.in" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://linkedin.com/company/dotmov" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://youtube.com/@dotmov" target="_blank" rel="noopener" class="social-link" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Site</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">Studio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Contact</span>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4l6 5 6-5M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z"/></svg>
+        <span>raswanthjagan@gmail.com</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="1" width="12" height="14" rx="2"/><line x1="6" y1="5" x2="10" y2="5"/><line x1="5" y1="8" x2="11" y2="8"/><line x1="5" y1="11" x2="11" y2="11"/></svg>
+        <span>+91 99431 11944</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 1C5.24 1 3 3.24 3 6c0 4 5 9 5 9s5-5 5-9c0-2.76-2.24-5-5-5z"/><circle cx="8" cy="6" r="1.5"/></svg>
+        <span>Chennai, Tamil Nadu, India</span>
+      </div>
+      <a href="https://wa.me/919943111944?text=Hi%20Raswanth%2C%20I%27d%20like%20to%20book%20a%20strategy%20call." target="_blank" rel="noopener" class="wa-btn" style="margin-top:1rem;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:.875rem;color:var(--text-on-dark-mut);margin-bottom:1rem;line-height:1.55;">Content strategy insights, once a fortnight.</p>
+      <form class="newsletter-form" onsubmit="return false;" aria-label="Newsletter signup">
+        <input type="email" class="newsletter-input" placeholder="your@email.com" aria-label="Email address" autocomplete="email">
+        <button type="submit" class="newsletter-btn">Join</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 DOTMOV &middot; VIDEO PRODUCTION STUDIO, CHENNAI</span>
+    <div class="footer-socials-bottom">
+      <a href="https://instagram.com/dotmov.in" target="_blank" rel="noopener">INSTAGRAM</a>
+      <a href="https://linkedin.com/company/dotmov" target="_blank" rel="noopener">LINKEDIN</a>
+      <a href="https://youtube.com/@dotmov" target="_blank" rel="noopener">YOUTUBE</a>
+    </div>
+  </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

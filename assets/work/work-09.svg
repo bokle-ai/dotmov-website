@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#0a2744"/>
+  <polygon points="0,0 320,0 0,180" fill="#d4a642" opacity="0.08"/>
+  <polygon points="800,450 480,450 800,270" fill="#d4a642" opacity="0.08"/>
+  <text x="400" y="215" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="24.75" fill="#d4a642" letter-spacing="2">PRODUCT LAUNCH</text>
+  <text x="400" y="255" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="13.5" fill="#ffffff" opacity="0.5">DOTMOV PRODUCTION</text>
+  <text x="400" y="430" text-anchor="middle" font-family="Inter,sans-serif" font-weight="400" font-size="11.25" fill="#d4a642" opacity="0.5">TODO: replace</text>
+</svg>
