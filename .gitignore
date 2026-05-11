@@ -3,3 +3,4 @@
 node_modules/
 *.log
 *-web.mp4
+.vercel
