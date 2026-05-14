@@ -378,24 +378,44 @@
   }
 
   // ── Cases Showcase — phone video + client switcher ────────────
-  const caseSwitchBtns = document.querySelectorAll('.case-switch-btn:not([disabled])');
+  const caseSwitchBtns = document.querySelectorAll('.case-switch-btn');
   const caseInfoPanels = document.querySelectorAll('.case-info');
   const casesVideo     = document.getElementById('casesVideo');
+  const reelAvatar     = document.getElementById('reelAvatar');
+  const reelHandle     = document.getElementById('reelHandle');
+  const reelCaption    = document.getElementById('reelCaption');
 
-  // Map case ID → video src (add more when uploading future clients)
-  const caseVideoMap = {
-    '1': 'assets/clients/parampara-dhothis.mp4',
-    '2': '',
-    '3': '',
+  // Per-client data — video, reel avatar initial, handle, caption
+  const caseData = {
+    '1': {
+      src:     'assets/clients/parampara-dhothis.mp4',
+      initial: 'V',
+      handle:  '@vinothkumar',
+      caption: 'Premium brand content 🎬',
+    },
+    '2': {
+      src:     'assets/clients/chennai-freelancers-club.mp4',
+      initial: 'J',
+      handle:  '@jayasakthi',
+      caption: 'Every frame looked intentional ✨',
+    },
+    '3': {
+      src:     'assets/clients/dr-thiagarajan.mp4',
+      initial: 'D',
+      handle:  '@drthiagarajan',
+      caption: 'Authority through content 🦷',
+    },
   };
 
   if (caseSwitchBtns.length) {
     caseSwitchBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.case;
+        const data = caseData[id];
+        if (!data) return;
 
         // Update tab state
-        document.querySelectorAll('.case-switch-btn').forEach((b) => {
+        caseSwitchBtns.forEach((b) => {
           b.classList.remove('active');
           b.setAttribute('aria-selected', 'false');
         });
@@ -407,12 +427,17 @@
         const panel = document.getElementById(`ci-${id}`);
         if (panel) panel.classList.add('active');
 
-        // Swap video src
-        if (casesVideo && caseVideoMap[id]) {
-          casesVideo.src = caseVideoMap[id];
+        // Swap video
+        if (casesVideo) {
+          casesVideo.src = data.src;
           casesVideo.load();
           if (!reducedMotion) casesVideo.play();
         }
+
+        // Update reel UI inside phone
+        if (reelAvatar)  reelAvatar.textContent  = data.initial;
+        if (reelHandle)  reelHandle.textContent   = data.handle;
+        if (reelCaption) reelCaption.textContent  = data.caption;
       });
     });
   }
