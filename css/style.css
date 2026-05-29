@@ -2739,3 +2739,15 @@ select.form-control {
 
   .cta-band-headline { font-size: clamp(2.25rem, 10vw, 3.5rem); }
 }
+
+/* ── Removed AI-tag elements — hidden globally as belt+suspenders ── */
+.why-card-tag,
+.mp-tags,
+.founder-img-label,
+.case-service-tag,
+.pricing-best-for,
+.pricing-ribbon,
+.hero-now-playing,
+.hero-brand-label,
+.reel-brand,
+.celeb-caption { display: none !important; }
