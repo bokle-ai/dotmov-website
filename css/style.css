@@ -648,28 +648,30 @@ em {
 
 .logos-eyebrow {
   text-align: center;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--text-on-dark-mut);
-  margin-bottom: 2.25rem;
+  color: rgba(155,155,163,0.7);
+  margin-bottom: 2rem;
+  padding: 0 var(--gutter);
 }
 
-/* Scrolling container — mask fades left & right edges into the dark bg */
+/* Scrolling container — soft fade at both edges */
 .logos-track-wrap {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
 }
 
 /* Infinite scroll track */
 .logos-track {
   display: flex;
   align-items: center;
-  gap: 4.5rem;
+  gap: 5rem;
   width: max-content;
-  animation: logosScroll 30s linear infinite;
+  padding: 0.25rem 0;
+  animation: logosScroll 32s linear infinite;
 }
 .logos-track:hover { animation-play-state: paused; }
 
@@ -678,29 +680,30 @@ em {
   to   { transform: translateX(-33.333%); }
 }
 
-/* Individual logo — no card, no border, direct on dark bg */
+/* Individual logo — crisp, no card, no border */
 .logos-item {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  opacity: 0.45;
-  transition: opacity 0.35s ease;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .logos-item:hover {
   opacity: 1;
+  transform: scale(1.06);
 }
 
-/* Joyalukkas: gold/white logo on transparent — tiny navy backing keeps it readable */
+/* Joyalukkas: white/gold logo needs the faintest dark surface */
 .logos-item--dark {
-  background: rgba(255,255,255,0.07);
-  border-radius: 6px;
-  padding: 5px 14px;
+  background: rgba(255,255,255,0.09);
+  border-radius: 5px;
+  padding: 6px 14px;
 }
 
 .logos-track img {
-  height: 38px;
-  max-width: 160px;
+  height: 42px;
+  max-width: 170px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -708,8 +711,8 @@ em {
 
 /* Square/circular logos (Chennai Freelancers Club) */
 .logos-track img[alt="Chennai Freelancers Club"] {
-  height: 46px;
-  max-width: 46px;
+  height: 50px;
+  max-width: 50px;
 }
 
 /* ── (02) Stats Band ─────────────────────────────────────────── */
