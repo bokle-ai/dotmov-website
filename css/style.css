@@ -637,87 +637,79 @@ em {
 }
 
 /* Hero brand strip */
-.hero-brand-strip {
-  position: relative;
-  z-index: 3;
-  border-top: 1px solid rgba(247,245,240,0.08);
-  padding: 1.25rem 0 1.5rem;
+/* ── Logos trust strip (logos3 style) ───────────────────────── */
+.logos-section {
+  background: var(--ink-2);
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+  overflow: hidden;
 }
-.hero-brand-label {
-  font-family: var(--font-sans);
+
+.logos-eyebrow {
+  text-align: center;
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(247,245,240,0.35);
-  text-align: center;
-  display: block;
-  margin-bottom: 1.25rem;
+  color: var(--text-on-dark-mut);
+  margin-bottom: 2.25rem;
 }
 
-/* Fade edges */
-.hero-brand-marquee-wrap {
+/* Scrolling container — mask fades left & right edges into the dark bg */
+.logos-track-wrap {
   overflow: hidden;
-  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
-.hero-brand-marquee-wrap::before,
-.hero-brand-marquee-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 100px;
-  z-index: 1;
-  pointer-events: none;
-}
-.hero-brand-marquee-wrap::before { left: 0;  background: linear-gradient(to right, var(--ink), transparent); }
-.hero-brand-marquee-wrap::after  { right: 0; background: linear-gradient(to left,  var(--ink), transparent); }
 
-/* Scrolling track — CSS animation, no JS needed */
-.marquee-track {
+/* Infinite scroll track */
+.logos-track {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 4.5rem;
   width: max-content;
-  animation: marqueeScroll 22s linear infinite;
+  animation: logosScroll 30s linear infinite;
 }
-.marquee-track:hover { animation-play-state: paused; }
+.logos-track:hover { animation-play-state: paused; }
 
-@keyframes marqueeScroll {
+@keyframes logosScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
 }
 
-/* Each logo sits in a pill card so brand colors pop on dark hero */
-.marquee-logo {
+/* Individual logo — no card, no border, direct on dark bg */
+.logos-item {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 10px 20px;
-  height: 60px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0.45;
+  transition: opacity 0.35s ease;
 }
-/* Dark pill for white-text logos (Joyalukkas) */
-.marquee-logo--dark {
-  background: #1a0a10;
+.logos-item:hover {
+  opacity: 1;
 }
-.marquee-logo:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+
+/* Joyalukkas: gold/white logo on transparent — tiny navy backing keeps it readable */
+.logos-item--dark {
+  background: rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 5px 14px;
 }
-.hero-brand-strip .marquee-logo img {
-  height: 32px;
-  max-width: 140px;
+
+.logos-track img {
+  height: 38px;
+  max-width: 160px;
   width: auto;
   object-fit: contain;
   display: block;
 }
-/* Square/circular logos (Chennai Freelancers) — allow a bit more height */
-.hero-brand-strip .marquee-logo img[alt="Chennai Freelancers Club"] {
-  height: 40px;
-  max-width: 40px;
+
+/* Square/circular logos (Chennai Freelancers Club) */
+.logos-track img[alt="Chennai Freelancers Club"] {
+  height: 46px;
+  max-width: 46px;
 }
 
 /* ── (02) Stats Band ─────────────────────────────────────────── */
@@ -2611,7 +2603,7 @@ select.form-control {
   .why-card, .why-card.wc-visible {
     opacity: 1; transform: none; transition: none;
   }
-  .marquee-track { animation: none; }
+  .logos-track { animation: none; }
   .hero-scroll-line { animation: none; }
   .cta-grain { animation: none; }
   *, *::before, *::after {
