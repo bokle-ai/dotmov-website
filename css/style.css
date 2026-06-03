@@ -639,10 +639,10 @@ em {
 /* Hero brand strip */
 /* ── Logos trust strip (logos3 style) ───────────────────────── */
 .logos-section {
-  background: var(--ink-2);
-  padding: 3.5rem 0;
-  border-top: 1px solid var(--line-dark);
-  border-bottom: 1px solid var(--line-dark);
+  background: #ffffff;
+  padding: 4rem 0;
+  border-top: 1px solid #e8e4dc;
+  border-bottom: 1px solid #e8e4dc;
   overflow: hidden;
 }
 
@@ -652,26 +652,26 @@ em {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(155,155,163,0.7);
-  margin-bottom: 2rem;
+  color: #9b9ba3;
+  margin-bottom: 2.25rem;
   padding: 0 var(--gutter);
 }
 
-/* Scrolling container — soft fade at both edges */
+/* Scrolling container — fades into white at both edges */
 .logos-track-wrap {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 /* Infinite scroll track */
 .logos-track {
   display: flex;
   align-items: center;
-  gap: 5rem;
+  gap: 5.5rem;
   width: max-content;
-  padding: 0.25rem 0;
-  animation: logosScroll 32s linear infinite;
+  padding: 0.5rem 0;
+  animation: logosScroll 34s linear infinite;
 }
 .logos-track:hover { animation-play-state: paused; }
 
@@ -680,30 +680,35 @@ em {
   to   { transform: translateX(-33.333%); }
 }
 
-/* Individual logo — crisp, no card, no border */
+/* Individual logo — full opacity, natural colours, no box */
 .logos-item {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  opacity: 0.75;
+  opacity: 0.65;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .logos-item:hover {
   opacity: 1;
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-/* Joyalukkas: white/gold logo needs the faintest dark surface */
+/* Joyalukkas: brightness 224 = almost white logo — needs navy backing */
 .logos-item--dark {
-  background: rgba(255,255,255,0.09);
-  border-radius: 5px;
-  padding: 6px 14px;
+  background: var(--navy);
+  border-radius: 6px;
+  padding: 8px 18px;
+  opacity: 1; /* always full opacity — the pill does the work */
+}
+.logos-item--dark:hover {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .logos-track img {
-  height: 42px;
-  max-width: 170px;
+  height: 44px;
+  max-width: 180px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -711,8 +716,8 @@ em {
 
 /* Square/circular logos (Chennai Freelancers Club) */
 .logos-track img[alt="Chennai Freelancers Club"] {
-  height: 50px;
-  max-width: 50px;
+  height: 52px;
+  max-width: 52px;
 }
 
 /* ── (02) Stats Band ─────────────────────────────────────────── */
