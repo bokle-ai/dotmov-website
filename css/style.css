@@ -45,6 +45,14 @@
   /* Spacing */
   --gutter: clamp(20px, 4vw, 56px);
   --max-w:  1440px;
+
+  /* Aliases used across inner pages */
+  --paper-soft: #f6f7fb;
+  --line:       #e8e4dc;
+  --r-sm:       8px;
+  --r-md:       16px;
+  --r-lg:       24px;
+  --r-full:     999px;
 }
 
 /* ── Reset ──────────────────────────────────────────────────── */
@@ -144,10 +152,22 @@ em {
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.section { padding: clamp(80px, 10vw, 140px) 0; }
+.section    { padding: clamp(80px, 10vw, 140px) 0; }
+.section-sm { padding: clamp(40px, 5vw, 64px) 0; }
 .section-dark  { background: var(--ink);   color: var(--text-on-dark); }
 .section-light { background: var(--paper); color: var(--text-on-light); }
 .section-warm  { background: var(--paper); }
+
+/* Named bg helpers used across inner pages */
+.bg-paper { background: var(--paper); }
+.bg-soft  { background: var(--paper-soft); }
+.bg-dark  { background: var(--ink-2); color: var(--text-on-dark); }
+
+/* Proof / stats dark band (about page) */
+.ps-section {
+  background: var(--ink-2);
+  color: var(--text-on-dark);
+}
 
 /* Section-number prefix system */
 .section-num,

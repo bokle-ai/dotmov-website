@@ -22,7 +22,7 @@
   <a href="work.html"     class="mobile-nav-link"><span class="mobile-nav-label">Work</span></a>
   <a href="services.html" class="mobile-nav-link"><span class="mobile-nav-label">Services</span></a>
   <a href="pricing.html"  class="mobile-nav-link"><span class="mobile-nav-label">Pricing</span></a>
-  <a href="about.html"    class="mobile-nav-link"><span class="mobile-nav-label">Studio</span></a>
+  <a href="about.html"    class="mobile-nav-link"><span class="mobile-nav-label">About</span></a>
   <a href="contact.html" class="btn-primary mobile-nav-cta">Book a Call <span class="btn-arrow">&#x2192;</span></a>
 </nav>
 
@@ -35,8 +35,8 @@
       </a>
       <nav class="navbar-nav" aria-label="Main navigation">
         <a href="work.html">WORKS</a>
-        <a href="about.html">STUDIO</a>
-        <a href="services.html">METHOD</a>
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
         <a href="pricing.html">PRICING</a>
         <a href="contact.html">CONTACT</a>
       </nav>
@@ -95,7 +95,7 @@
               <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 2C7.686 2 5 4.686 5 8c0 5.5 6 12 6 12s6-6.5 6-12c0-3.314-2.686-6-6-6z"/><circle cx="11" cy="8" r="2.5"/></svg>
             </div>
             <div>
-              <p class="contact-detail-label">Studio</p>
+              <p class="contact-detail-label">About</p>
               <p class="contact-detail-value">Chennai, Tamil Nadu, India</p>
             </div>
           </div>
@@ -142,7 +142,20 @@
           <h3 style="margin-bottom:.5rem;">Tell us about your brand.</h3>
           <p style="color:rgba(10,10,10,.55); font-size:.9375rem; margin-bottom:2rem; max-width:none;">Fill out the form below and we'll get back to you within 24 hours with clear next steps.</p>
 
-          <form id="contactForm" action="mailto:raswanthjagan@gmail.com" method="POST" enctype="text/plain" novalidate>
+          <!-- Success message (shown after submit) -->
+          <div id="formSuccess" style="display:none;text-align:center;padding:3rem 2rem;background:var(--paper-soft);border-radius:var(--r-md);border:1px solid var(--line);">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="var(--navy)" stroke-width="2.5" style="margin:0 auto 1.25rem;display:block;"><circle cx="24" cy="24" r="21"/><polyline points="14,24 21,31 34,17"/></svg>
+            <h3 style="color:var(--navy);margin-bottom:.75rem;">Message sent!</h3>
+            <p style="color:var(--text-on-light-mut);max-width:34ch;margin:0 auto;">We'll get back to you within 24 hours. Or WhatsApp us for a faster reply.</p>
+            <a href="https://wa.me/919943111944" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;margin-top:1.5rem;">WhatsApp Raswanth <span class="btn-arrow">→</span></a>
+          </div>
+
+          <form id="contactForm" action="https://formsubmit.co/raswanthjagan@gmail.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New enquiry from DotMov website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://dotmov.in/contact.html">
+            <input type="text" name="_honey" style="display:none;" tabindex="-1" autocomplete="off">
 
             <div class="form-row">
               <div class="form-group">
@@ -210,7 +223,7 @@
       </div>
       <div>
         <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--navy);">Free</div>
-        <div style="font-size:.875rem;color:rgba(10,10,10,.5);margin-top:.25rem;">Strategy call no obligation</div>
+        <div style="font-size:.875rem;color:rgba(10,10,10,.5);margin-top:.25rem;">Strategy call, no obligation</div>
       </div>
       <div>
         <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--navy);">48 hrs</div>
@@ -262,7 +275,7 @@
         <a href="work.html">Work</a>
         <a href="services.html">Services</a>
         <a href="pricing.html">Pricing</a>
-        <a href="about.html">Studio</a>
+        <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>

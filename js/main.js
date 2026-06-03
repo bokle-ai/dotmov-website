@@ -62,7 +62,7 @@
 
   // ── Active Nav Link Highlight ──────────────────────────────────
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.navbar-nav a, .mobile-nav-links a').forEach((link) => {
+  document.querySelectorAll('.navbar-nav a, .mobile-nav a').forEach((link) => {
     const href = link.getAttribute('href');
     if (href === currentPage || (currentPage === '' && href === 'index.html')) {
       link.classList.add('active');
@@ -718,37 +718,53 @@
     }
   }
 
-  // ── Contact Form: mailto submit ────────────────────────────────
+  // ── Contact Form: FormSubmit with inline validation + success state ──
   const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
       const name    = document.getElementById('name')?.value.trim()    || '';
       const email   = document.getElementById('email')?.value.trim()   || '';
       const phone   = document.getElementById('phone')?.value.trim()   || '';
-      const company = document.getElementById('company')?.value.trim() || '';
-      const pkg     = document.getElementById('package')?.value        || '';
       const message = document.getElementById('message')?.value.trim() || '';
 
       if (!name || !email || !phone || !message) {
-        alert('Please fill in all required fields.');
+        e.preventDefault();
+        // Highlight empty required fields
+        [['name',name],['email',email],['phone',phone],['message',message]].forEach(([id, val]) => {
+          const el = document.getElementById(id);
+          if (el) el.style.borderColor = val ? '' : '#e53e3e';
+        });
         return;
       }
-
-      const body = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${phone}`,
-        company ? `Company: ${company}` : '',
-        pkg     ? `Package: ${pkg}`     : '',
-        `\nMessage:\n${message}`,
-      ].filter(Boolean).join('\n');
-
-      const subject = encodeURIComponent(`DotMov Enquiry — ${name}`);
-      const bodyEnc = encodeURIComponent(body);
-      window.location.href = `mailto:raswanthjagan@gmail.com?subject=${subject}&body=${bodyEnc}`;
+      // Let FormSubmit handle the actual POST; show success on return
+      if (formSuccess) {
+        // If same-page return (SPA-style), show inline success
+        // For full redirect, FormSubmit handles it via _next hidden field
+      }
     });
+
+    // Show success message if redirected back with ?sent=1
+    if (window.location.search.includes('sent=1') && formSuccess) {
+      contactForm.style.display = 'none';
+      formSuccess.style.display = 'block';
+    }
   }
+
+  // ── Newsletter Form: show inline thank-you ─────────────────────
+  document.querySelectorAll('.newsletter-form').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('.newsletter-input');
+      const btn   = form.querySelector('.newsletter-btn');
+      if (input && input.value.includes('@')) {
+        if (btn) { btn.textContent = '✓'; btn.disabled = true; btn.style.background = 'var(--gold)'; btn.style.color = 'var(--ink)'; }
+        if (input) { input.value = ''; input.placeholder = 'You\'re in!'; input.disabled = true; }
+      } else if (input) {
+        input.style.borderColor = '#e53e3e';
+        input.focus();
+      }
+    });
+  });
 
 })();
