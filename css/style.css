@@ -320,37 +320,69 @@ em {
 }
 .logo-text .logo-dot { color: var(--gold); }
 
-.navbar-nav {
+/* ── Pill Navigation (reference: 21st.dev/krittyz/nav-header) ─── */
+.pill-nav {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 2rem;
   justify-self: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  padding: 5px;
+  gap: 2px;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
-.navbar-nav a {
+.navbar.scrolled .pill-nav {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* The sliding gold cursor — moves behind active/hovered link */
+.pill-cursor {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: calc(100% - 10px);
+  background: var(--gold);
+  border-radius: 999px;
+  /* Spring-like easing — mimics Framer Motion spring */
+  transition: left   0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+              width  0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+              opacity 0.2s ease;
+  pointer-events: none;
+  opacity: 0;
+  will-change: left, width;
+}
+
+/* Nav links */
+.pill-link {
+  position: relative;
+  z-index: 1;
+  padding: 8px 16px;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.6875rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(247,245,240,0.7);
-  transition: color 0.3s ease;
-  position: relative;
+  color: rgba(247, 245, 240, 0.72);
+  border-radius: 999px;
   white-space: nowrap;
+  transition: color 0.22s ease;
+  cursor: pointer;
+  text-decoration: none;
 }
-.navbar-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0; right: 0;
-  height: 1px;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease-out-expo);
+/* Text goes dark when the gold cursor is underneath */
+.pill-link.pill-active,
+.pill-link.pill-over {
+  color: var(--ink);
 }
-.navbar-nav a:hover { color: var(--paper); }
-.navbar-nav a:hover::after,
-.navbar-nav a.active::after { transform: scaleX(1); }
-.navbar-nav a.active { color: var(--paper); }
+/* Keep the active link styled even without hover */
+.pill-link.active {
+  color: var(--ink);
+}
 
 .navbar-cta-wrap {
   display: flex;
@@ -2648,7 +2680,7 @@ select.form-control {
 
 @media (max-width: 1024px) {
   .navbar-inner { grid-template-columns: 1fr auto; }
-  .navbar-nav { display: none; }
+  .pill-nav { display: none; }
   .hamburger { display: flex; }
   .navbar-cta { display: none; }
 

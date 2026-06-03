@@ -61,13 +61,73 @@
   }
 
   // ── Active Nav Link Highlight ──────────────────────────────────
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.navbar-nav a, .mobile-nav a').forEach((link) => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+  const rawPage = window.location.pathname.split('/').pop() || '';
+  // Handle both /about.html and /about (server strips .html)
+  const currentPage = rawPage || 'index.html';
+  const currentBase = currentPage.replace('.html', '') || 'index';
+  document.querySelectorAll('.pill-link, .mobile-nav a').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const hrefBase = href.replace('.html', '') || 'index';
+    if (href === currentPage || hrefBase === currentBase ||
+        (currentBase === 'index' && (href === 'index.html' || href === ''))) {
       link.classList.add('active');
     }
   });
+
+  // ── Pill Nav — sliding gold cursor (Framer Motion–style spring) ─
+  const pillNav    = document.getElementById('pillNav');
+  const pillCursor = document.getElementById('pillCursor');
+  const pillLinks  = pillNav ? [...pillNav.querySelectorAll('.pill-link')] : [];
+
+  if (pillNav && pillCursor && pillLinks.length) {
+
+    function moveTo(el, instant) {
+      const navRect  = pillNav.getBoundingClientRect();
+      const linkRect = el.getBoundingClientRect();
+      if (instant) {
+        pillCursor.style.transition = 'none';
+        requestAnimationFrame(() => { pillCursor.style.transition = ''; });
+      }
+      pillCursor.style.left    = (linkRect.left - navRect.left) + 'px';
+      pillCursor.style.width   = linkRect.width + 'px';
+      pillCursor.style.opacity = '1';
+    }
+
+    function returnToActive() {
+      const active = pillLinks.find(l => l.classList.contains('active'));
+      pillLinks.forEach(l => l.classList.remove('pill-over'));
+      if (active) {
+        moveTo(active);
+        active.classList.add('pill-active');
+      } else {
+        pillCursor.style.opacity = '0';
+      }
+    }
+
+    pillLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        pillLinks.forEach(l => l.classList.remove('pill-over', 'pill-active'));
+        link.classList.add('pill-over');
+        moveTo(link);
+      });
+    });
+
+    pillNav.addEventListener('mouseleave', () => {
+      pillLinks.forEach(l => l.classList.remove('pill-over'));
+      returnToActive();
+    });
+
+    // Place cursor on active link — two rAF frames ensures layout is fully painted
+    function initCursor() {
+      const active = pillLinks.find(l => l.classList.contains('active'));
+      if (active) {
+        active.classList.add('pill-active');
+        moveTo(active, true);
+      }
+    }
+    // Double rAF: first frame triggers layout, second reads correct positions
+    requestAnimationFrame(() => requestAnimationFrame(initCursor));
+  }
 
   // ── Hero Word-by-Word Reveal ───────────────────────────────────
   const heroHeadline = document.getElementById('heroHeadline');
