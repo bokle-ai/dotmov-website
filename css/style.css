@@ -3055,3 +3055,19 @@ select.form-control {
   .tm-track { animation: none; }
   .tm-cols { height: auto; mask-image: none; -webkit-mask-image: none; }
 }
+
+/* Instagram strip — real reel posters + caption */
+.ig-tile-cap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 1.1rem .9rem .8rem;
+  background: linear-gradient(to top, rgba(10,10,11,.85), rgba(10,10,11,0));
+  pointer-events: none;
+}
+.ig-tile-cap-name {
+  display: block; font-family: var(--font-mono, monospace);
+  font-size: .64rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold, #e8b45a);
+}
+.ig-tile-cap-handle {
+  display: block; font-size: .6rem; color: rgba(255,255,255,.7); margin-top: .18rem;
+}
