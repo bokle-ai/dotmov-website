@@ -2,5 +2,7 @@
 .netlify
 node_modules/
 *.log
-*-web.mp4
 .vercel
+*-web.mp4
+# portfolio web videos ARE committed so they play on the live site
+!assets/portfolio/*-web.mp4

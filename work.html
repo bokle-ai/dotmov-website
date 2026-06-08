@@ -46,6 +46,47 @@
       transition: background .2s;
     }
     .lightbox-close:hover { background: rgba(255,255,255,.3); }
+  
+    /* ── Masonry portfolio (natural aspect ratio — never cropped) ── */
+    .work-masonry { columns: 4 300px; column-gap: 1.1rem; margin-top: 2rem; }
+    @media (max-width: 1180px){ .work-masonry{ columns: 3 280px; } }
+    @media (max-width: 820px){ .work-masonry{ columns: 2 160px; column-gap:.7rem; } }
+    .m-tile {
+      break-inside: avoid; -webkit-column-break-inside: avoid;
+      margin: 0 0 1.1rem; position: relative; display: block;
+      border-radius: var(--r-md, 14px); overflow: hidden; cursor: pointer;
+      background: rgba(10,10,10,.06); box-shadow: 0 6px 22px rgba(10,10,10,.10);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s;
+    }
+    @media (max-width: 820px){ .m-tile{ margin-bottom:.7rem; } }
+    .m-tile:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(10,10,10,.20); }
+    .m-tile img { width: 100%; height: auto; display: block; }
+    .m-tile .m-cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.6rem .9rem .7rem; display: flex; flex-direction: column; gap: .15rem;
+      background: linear-gradient(to top, rgba(10,10,10,.78), rgba(10,10,10,0));
+      opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s;
+    }
+    .m-tile:hover .m-cap, .m-tile:focus-visible .m-cap { opacity: 1; transform: translateY(0); }
+    .m-cap-cat { font-size:.66rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color: var(--gold); }
+    .m-cap-title { font-size:.95rem; font-weight:600; color:#fff; line-height:1.25; }
+    .m-play {
+      position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
+      width:60px; height:60px; border-radius:50%;
+      background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+      border:1.5px solid rgba(255,255,255,.7);
+      display:flex; align-items:center; justify-content:center; pointer-events:none;
+      transition: background .25s, transform .25s;
+    }
+    .m-tile:hover .m-play { background: var(--gold); transform: translate(-50%,-50%) scale(1.08); }
+    .m-play::after { content:""; display:block; width:0; height:0;
+      border-style:solid; border-width:9px 0 9px 15px; border-color: transparent transparent transparent #fff; margin-left:3px; }
+    .m-tile:hover .m-play::after { border-left-color:#0a0a0a; }
+    /* video-capable lightbox */
+    .lightbox-media { width:100%; max-height:78vh; display:block; background:#000; }
+    .lightbox-media.is-video { aspect-ratio:auto; }
+    .lightbox-card.media-only { max-width: 820px; background: transparent; }
+    .lightbox-card.media-only .lightbox-body { display:none; }
   </style>
 </head>
 <body>
@@ -53,12 +94,11 @@
 <!-- Lightbox -->
 <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Project detail">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
-  <div class="lightbox-card">
-    <img src="" alt="" class="lightbox-img" id="lightboxImg">
+  <div class="lightbox-card" id="lightboxCard">
+    <div id="lightboxMediaWrap"></div>
     <div class="lightbox-body">
       <p class="lightbox-category" id="lightboxCategory"></p>
       <h3 class="lightbox-title" id="lightboxTitle"></h3>
-      <p class="lightbox-meta" id="lightboxMeta"></p>
       <p class="lightbox-desc" id="lightboxDesc"></p>
     </div>
   </div>
@@ -112,198 +152,573 @@
 <section class="section bg-paper">
   <div class="container">
 
-    <!-- Filter chips — categories match Drive folder names -->
+    <!-- Filter chips — categories match portfolio folders -->
     <div class="work-filters" role="group" aria-label="Filter portfolio by category">
       <button class="filter-chip active" data-filter="all">All</button>
-      <button class="filter-chip" data-filter="personal-branding">Personal Branding</button>
-      <button class="filter-chip" data-filter="corporate-events">Corporate Events</button>
       <button class="filter-chip" data-filter="audio-launches">Audio Launches</button>
-      <button class="filter-chip" data-filter="product-shoots">Product Shoots</button>
-      <button class="filter-chip" data-filter="drone-model">Drone &amp; Model</button>
+      <button class="filter-chip" data-filter="corporate-events">Corporate Events</button>
+      <button class="filter-chip" data-filter="personal-branding">Personal Branding</button>
+      <button class="filter-chip" data-filter="product-shoot">Product Shoot</button>
+      <button class="filter-chip" data-filter="model-shoot">Model Shoot</button>
+      <button class="filter-chip" data-filter="textile-shoot">Textile Shoot</button>
+      <button class="filter-chip" data-filter="long-form">Long Form</button>
     </div>
 
-    <div class="work-grid" id="workGrid">
-
-      <!-- PERSONAL BRANDING folder -->
-      <div class="work-tile portrait reveal"
-           data-category="personal-branding"
-           data-title="Personal Branding Session"
-           data-client="DotMov Client"
-           data-service="Personal Branding"
-           data-desc="High-impact personal branding shoot built to position a founder as the face of their brand. Cinematic lighting, intentional wardrobe direction, and location scouting delivering a full content library for LinkedIn and Instagram."
-           data-img="assets/work/work-01.jpg">
-        <img src="assets/work/work-01.jpg" alt="Personal branding session by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Personal Branding</p>
-          <p class="work-meta">Personal Branding · Chennai</p>
-        </div>
-      </div>
-
-      <!-- CORPORATE EVENTS folder — Workshop.mov -->
-      <div class="work-tile reveal reveal-delay-1"
-           data-category="corporate-events"
-           data-title="Workshop Event Coverage"
-           data-client="Corporate Client"
-           data-service="Corporate Events"
-           data-desc="End-to-end workshop coverage capturing speaker sessions, audience engagement, and key moments. Multi-angle setup across the event floor delivered a premium highlight reel and 15+ standalone clips for social distribution within 48 hours."
-           data-img="assets/work/work-02.jpg">
-        <img src="assets/work/work-02.jpg" alt="Workshop event coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Workshop Coverage</p>
-          <p class="work-meta">Corporate Events · Workshop</p>
-        </div>
-      </div>
-
-      <!-- CORPORATE EVENTS folder — Corporate Meetup.mov -->
-      <div class="work-tile reveal reveal-delay-2"
-           data-category="corporate-events"
-           data-title="Corporate Meetup Coverage"
-           data-client="Corporate Client"
-           data-service="Corporate Events"
-           data-desc="Full coverage of a corporate meetup session. Dynamic framing, speaker close-ups, and audience reaction shots turned a single session into a shareable content library for internal comms and LinkedIn distribution."
-           data-img="assets/work/work-03.jpg">
-        <img src="assets/work/work-03.jpg" alt="Corporate meetup coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Corporate Meetup</p>
-          <p class="work-meta">Corporate Events · Meetup</p>
-        </div>
-      </div>
-
-      <!-- CORPORATE EVENTS folder — Corporate Event.mov -->
-      <div class="work-tile reveal reveal-delay-3"
-           data-category="corporate-events"
-           data-title="Corporate Event Coverage"
-           data-client="MakersTribe"
-           data-service="Corporate Events"
-           data-desc="Complete event production for a large-scale corporate gathering. Stage moments, networking interactions, and speaker highlights captured across multiple angles. Delivered a full event film and 20+ clips within 72 hours."
-           data-img="assets/work/work-04.jpg">
-        <img src="assets/work/work-04.jpg" alt="Corporate event coverage, DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Corporate Event</p>
-          <p class="work-meta">Corporate Events · Chennai</p>
-        </div>
-      </div>
-
-      <!-- AUDIO LAUNCHES folder -->
-      <div class="work-tile reveal reveal-delay-1"
-           data-category="audio-launches"
-           data-title="Audio Launch Coverage"
-           data-client="Music Label"
-           data-service="Audio Launches"
-           data-desc="Premium red-carpet coverage of an audio launch event. Artist arrivals, press interactions, and stage moments captured with cinematic precision. Publication-ready stills and edited video clips delivered same-day for media distribution."
-           data-img="assets/work/work-05.jpg">
-        <img src="assets/work/work-05.jpg" alt="Audio launch coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Audio Launch</p>
-          <p class="work-meta">Audio Launches · Red Carpet</p>
-        </div>
-      </div>
-
-      <!-- CORPORATE EVENTS folder — Industrial Cinematic.mov / wide tile -->
-      <div class="work-tile wide reveal reveal-delay-2"
-           data-category="corporate-events"
-           data-title="Corporate Conference Coverage"
-           data-client="Corporate Client"
-           data-service="Corporate Events"
-           data-desc="Full-scale corporate conference coverage spanning keynote addresses, panel discussions, and networking sessions. Multi-camera production delivered a 6-minute event film, individual speaker reels, and a social-ready highlight package within 48 hours."
-           data-img="assets/work/work-06.jpg">
-        <img src="assets/work/work-06.jpg" alt="Corporate conference coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Corporate Conference</p>
-          <p class="work-meta">Corporate Events · Conference Hall</p>
-        </div>
-      </div>
-
-      <!-- AUDIO LAUNCHES folder — anchor/MC coverage -->
-      <div class="work-tile portrait reveal reveal-delay-1"
-           data-category="audio-launches"
-           data-title="Audio Launch Anchor Coverage"
-           data-client="Brand Client"
-           data-service="Audio Launches"
-           data-desc="Cinematic coverage of a premium audio launch event, focusing on the anchor and host segments. Tight framing, dramatic stage lighting, and premium colour grading produced broadcast-quality content for digital and television distribution."
-           data-img="assets/work/work-07.jpg">
-        <img src="assets/work/work-07.jpg" alt="Audio launch anchor coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Audio Launch Anchor</p>
-          <p class="work-meta">Audio Launches · Stage</p>
-        </div>
-      </div>
-
-      <!-- AUDIO LAUNCHES folder — stage coverage -->
-      <div class="work-tile reveal reveal-delay-2"
-           data-category="audio-launches"
-           data-title="Audio Launch Stage Coverage"
-           data-client="Music Label"
-           data-service="Audio Launches"
-           data-desc="Multi-camera stage coverage of an audio launch with celebrity appearances and live performances. Delivered 80+ edited assets within 24 hours covering all stage moments, audience interactions, and media bytes."
-           data-img="assets/work/work-08.jpg">
-        <img src="assets/work/work-08.jpg" alt="Audio launch stage coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Audio Launch Stage</p>
-          <p class="work-meta">Audio Launches · Performance</p>
-        </div>
-      </div>
-
-      <!-- AUDIO LAUNCHES folder — performance/dance -->
-      <div class="work-tile reveal reveal-delay-3"
-           data-category="audio-launches"
-           data-title="Audio Launch Performance Coverage"
-           data-client="Brand Client"
-           data-service="Audio Launches"
-           data-desc="Full cinematic coverage of a high-production audio launch performance. Multi-camera capture of stage choreography, artist energy, and audience moments. Delivered a premium highlight film and 20+ clips for digital and broadcast distribution."
-           data-img="assets/work/work-09.jpg">
-        <img src="assets/work/work-09.jpg" alt="Audio launch performance coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Audio Launch Performance</p>
-          <p class="work-meta">Audio Launches · Stage Performance</p>
-        </div>
-      </div>
-
-      <!-- CORPORATE EVENTS folder — CHENNAI FREELANCERS CLUB.mp4 -->
-      <div class="work-tile reveal reveal-delay-1"
-           data-category="corporate-events"
-           data-title="Chennai Freelancers Club"
-           data-client="Chennai Freelancers Club"
-           data-service="Corporate Events"
-           data-desc="Event and brand film production for Chennai's premier freelancer community. Workshop sessions, speaker moments, and community energy captured and shaped into a brand story used as a key membership conversion asset."
-           data-img="assets/work/work-10.jpg">
-        <img src="assets/work/work-10.jpg" alt="Chennai Freelancers Club event coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Chennai Freelancers Club</p>
-          <p class="work-meta">Corporate Events · Community</p>
-        </div>
-      </div>
-
-      <!-- PERSONAL BRANDING folder — CEO personal brand -->
-      <div class="work-tile portrait reveal reveal-delay-2"
-           data-category="personal-branding"
-           data-title="CEO Personal Branding"
-           data-client="Brand CEO"
-           data-service="Personal Branding"
-           data-desc="Personal branding production for a C-suite executive. Premium stage and event photography combined with a content strategy built around positioning the leader as a category authority on LinkedIn and Instagram."
-           data-img="assets/work/work-11.jpg">
-        <img src="assets/work/work-11.jpg" alt="CEO personal branding coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">CEO Personal Branding</p>
-          <p class="work-meta">Personal Branding · Executive</p>
-        </div>
-      </div>
-
-      <!-- CORPORATE EVENTS folder — corporate annual meet -->
-      <div class="work-tile reveal reveal-delay-3"
-           data-category="corporate-events"
-           data-title="Corporate Annual Meet"
-           data-client="Corporate Group"
-           data-service="Corporate Events"
-           data-desc="Cinematic coverage of a large-scale corporate annual gathering. Keynote speeches, award moments, and networking sessions captured across multiple camera angles. Full event film and 20+ highlight clips delivered within 72 hours."
-           data-img="assets/work/work-12.jpg">
-        <img src="assets/work/work-12.jpg" alt="Corporate annual meet coverage by DotMov" loading="lazy">
-        <div class="work-overlay">
-          <p class="work-title">Corporate Annual Meet</p>
-          <p class="work-meta">Corporate Events · Annual Gala</p>
-        </div>
-      </div>
-
+    <div class="work-masonry" id="workMasonry">
+      <figure class="m-tile" data-category="audio-launches" data-type="video"
+        data-title="Dhanush" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-video="assets/portfolio/audio-launches-vid-01-web.mp4" data-poster="assets/portfolio/audio-launches-vid-01.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/audio-launches-vid-01.jpg" alt="Dhanush — Audio Launches by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span><span class="m-cap-title">Dhanush</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="video"
+        data-title="Kamal Hassan" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-video="assets/portfolio/audio-launches-vid-02-web.mp4" data-poster="assets/portfolio/audio-launches-vid-02.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/audio-launches-vid-02.jpg" alt="Kamal Hassan — Audio Launches by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span><span class="m-cap-title">Kamal Hassan</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-01.jpg"
+        style="aspect-ratio:1500/1500">
+        <img src="assets/portfolio/audio-launches-01.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-02.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-02.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-03.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-03.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-04.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-04.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-05.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-05.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-06.jpg"
+        style="aspect-ratio:1000/1500">
+        <img src="assets/portfolio/audio-launches-06.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-07.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-07.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-08.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-08.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-09.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-09.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-10.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-10.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-11.jpg"
+        style="aspect-ratio:844/1500">
+        <img src="assets/portfolio/audio-launches-11.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-12.jpg"
+        style="aspect-ratio:844/1500">
+        <img src="assets/portfolio/audio-launches-12.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-13.jpg"
+        style="aspect-ratio:844/1500">
+        <img src="assets/portfolio/audio-launches-13.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-14.jpg"
+        style="aspect-ratio:1500/844">
+        <img src="assets/portfolio/audio-launches-14.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-15.jpg"
+        style="aspect-ratio:844/1500">
+        <img src="assets/portfolio/audio-launches-15.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-16.jpg"
+        style="aspect-ratio:844/1500">
+        <img src="assets/portfolio/audio-launches-16.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-17.jpg"
+        style="aspect-ratio:1125/1500">
+        <img src="assets/portfolio/audio-launches-17.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-18.jpg"
+        style="aspect-ratio:1125/1500">
+        <img src="assets/portfolio/audio-launches-18.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-19.jpg"
+        style="aspect-ratio:1124/1500">
+        <img src="assets/portfolio/audio-launches-19.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-20.jpg"
+        style="aspect-ratio:1125/1500">
+        <img src="assets/portfolio/audio-launches-20.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-21.jpg"
+        style="aspect-ratio:1000/1500">
+        <img src="assets/portfolio/audio-launches-21.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-22.jpg"
+        style="aspect-ratio:1500/843">
+        <img src="assets/portfolio/audio-launches-22.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-23.jpg"
+        style="aspect-ratio:1000/1500">
+        <img src="assets/portfolio/audio-launches-23.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-24.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/audio-launches-24.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-25.jpg"
+        style="aspect-ratio:916/1500">
+        <img src="assets/portfolio/audio-launches-25.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-26.jpg"
+        style="aspect-ratio:1500/810">
+        <img src="assets/portfolio/audio-launches-26.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-27.jpg"
+        style="aspect-ratio:821/1500">
+        <img src="assets/portfolio/audio-launches-27.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-28.jpg"
+        style="aspect-ratio:1500/819">
+        <img src="assets/portfolio/audio-launches-28.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-29.jpg"
+        style="aspect-ratio:982/1500">
+        <img src="assets/portfolio/audio-launches-29.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-30.jpg"
+        style="aspect-ratio:1500/1255">
+        <img src="assets/portfolio/audio-launches-30.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="audio-launches" data-type="image"
+        data-title="Audio Launches" data-cat-label="Audio Launches"
+        data-desc="Premium red-carpet and stage coverage of music &amp; audio launch events — artist arrivals, performances, and press moments captured with cinematic precision."
+        data-img="assets/portfolio/audio-launches-31.jpg"
+        style="aspect-ratio:1500/844">
+        <img src="assets/portfolio/audio-launches-31.jpg" alt="Audio Launches photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Audio Launches</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="video"
+        data-title="Corporate Event" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-video="assets/portfolio/corporate-events-vid-01-web.mp4" data-poster="assets/portfolio/corporate-events-vid-01.jpg"
+        style="aspect-ratio:1920/1080">
+        <img src="assets/portfolio/corporate-events-vid-01.jpg" alt="Corporate Event — Corporate Events by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span><span class="m-cap-title">Corporate Event</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="video"
+        data-title="Corporate Meetup" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-video="assets/portfolio/corporate-events-vid-02-web.mp4" data-poster="assets/portfolio/corporate-events-vid-02.jpg"
+        style="aspect-ratio:1920/1080">
+        <img src="assets/portfolio/corporate-events-vid-02.jpg" alt="Corporate Meetup — Corporate Events by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span><span class="m-cap-title">Corporate Meetup</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="video"
+        data-title="Dharaneedharan - CEO" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-video="assets/portfolio/corporate-events-vid-03-web.mp4" data-poster="assets/portfolio/corporate-events-vid-03.jpg"
+        style="aspect-ratio:2160/3840">
+        <img src="assets/portfolio/corporate-events-vid-03.jpg" alt="Dharaneedharan - CEO — Corporate Events by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span><span class="m-cap-title">Dharaneedharan - CEO</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="video"
+        data-title="Ratheesh Krishnan - Managing Director" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-video="assets/portfolio/corporate-events-vid-04-web.mp4" data-poster="assets/portfolio/corporate-events-vid-04.jpg"
+        style="aspect-ratio:2160/3840">
+        <img src="assets/portfolio/corporate-events-vid-04.jpg" alt="Ratheesh Krishnan - Managing Director — Corporate Events by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span><span class="m-cap-title">Ratheesh Krishnan - Managing Director</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-01.jpg"
+        style="aspect-ratio:844/1500">
+        <img src="assets/portfolio/corporate-events-01.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-02.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-02.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-03.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-03.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-04.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-04.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-05.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-05.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-06.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-06.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-07.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-07.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-08.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-08.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-09.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-09.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-10.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-10.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-11.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-11.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-12.jpg"
+        style="aspect-ratio:1125/1500">
+        <img src="assets/portfolio/corporate-events-12.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-13.jpg"
+        style="aspect-ratio:1500/1125">
+        <img src="assets/portfolio/corporate-events-13.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-14.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-14.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-15.jpg"
+        style="aspect-ratio:1500/1192">
+        <img src="assets/portfolio/corporate-events-15.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-16.jpg"
+        style="aspect-ratio:1500/1000">
+        <img src="assets/portfolio/corporate-events-16.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-17.jpg"
+        style="aspect-ratio:1500/1120">
+        <img src="assets/portfolio/corporate-events-17.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="corporate-events" data-type="image"
+        data-title="Corporate Events" data-cat-label="Corporate Events"
+        data-desc="End-to-end corporate event production — keynotes, panels, and networking captured across multiple angles and shaped into film + social-ready clips."
+        data-img="assets/portfolio/corporate-events-18.jpg"
+        style="aspect-ratio:928/1500">
+        <img src="assets/portfolio/corporate-events-18.jpg" alt="Corporate Events photography by DotMov" loading="lazy">
+        <figcaption class="m-cap"><span class="m-cap-cat">Corporate Events</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="personal-branding" data-type="video"
+        data-title="Abroad Consultancy Work" data-cat-label="Personal Branding"
+        data-desc="High-impact personal branding content built to position founders and executives as the face of their brand across LinkedIn and Instagram."
+        data-video="assets/portfolio/personal-branding-vid-01-web.mp4" data-poster="assets/portfolio/personal-branding-vid-01.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/personal-branding-vid-01.jpg" alt="Abroad Consultancy Work — Personal Branding by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Personal Branding</span><span class="m-cap-title">Abroad Consultancy Work</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="personal-branding" data-type="video"
+        data-title="Dentist" data-cat-label="Personal Branding"
+        data-desc="High-impact personal branding content built to position founders and executives as the face of their brand across LinkedIn and Instagram."
+        data-video="assets/portfolio/personal-branding-vid-02-web.mp4" data-poster="assets/portfolio/personal-branding-vid-02.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/personal-branding-vid-02.jpg" alt="Dentist — Personal Branding by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Personal Branding</span><span class="m-cap-title">Dentist</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="personal-branding" data-type="video"
+        data-title="Sunitha G Ads" data-cat-label="Personal Branding"
+        data-desc="High-impact personal branding content built to position founders and executives as the face of their brand across LinkedIn and Instagram."
+        data-video="assets/portfolio/personal-branding-vid-03-web.mp4" data-poster="assets/portfolio/personal-branding-vid-03.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/personal-branding-vid-03.jpg" alt="Sunitha G Ads — Personal Branding by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Personal Branding</span><span class="m-cap-title">Sunitha G Ads</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="product-shoot" data-type="video"
+        data-title="Img_8965" data-cat-label="Product Shoot"
+        data-desc="Scroll-stopping product films — food, jewellery, and lifestyle shot with controlled lighting and motion built for conversion."
+        data-video="assets/portfolio/product-shoot-vid-01-web.mp4" data-poster="assets/portfolio/product-shoot-vid-01.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/product-shoot-vid-01.jpg" alt="Img_8965 — Product Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Product Shoot</span><span class="m-cap-title">Img_8965</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="product-shoot" data-type="video"
+        data-title="Jewellery" data-cat-label="Product Shoot"
+        data-desc="Scroll-stopping product films — food, jewellery, and lifestyle shot with controlled lighting and motion built for conversion."
+        data-video="assets/portfolio/product-shoot-vid-02-web.mp4" data-poster="assets/portfolio/product-shoot-vid-02.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/product-shoot-vid-02.jpg" alt="Jewellery — Product Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Product Shoot</span><span class="m-cap-title">Jewellery</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="product-shoot" data-type="video"
+        data-title="Mava Cake" data-cat-label="Product Shoot"
+        data-desc="Scroll-stopping product films — food, jewellery, and lifestyle shot with controlled lighting and motion built for conversion."
+        data-video="assets/portfolio/product-shoot-vid-03-web.mp4" data-poster="assets/portfolio/product-shoot-vid-03.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/product-shoot-vid-03.jpg" alt="Mava Cake — Product Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Product Shoot</span><span class="m-cap-title">Mava Cake</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="product-shoot" data-type="video"
+        data-title="VR Game Cafe" data-cat-label="Product Shoot"
+        data-desc="Scroll-stopping product films — food, jewellery, and lifestyle shot with controlled lighting and motion built for conversion."
+        data-video="assets/portfolio/product-shoot-vid-04-web.mp4" data-poster="assets/portfolio/product-shoot-vid-04.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/product-shoot-vid-04.jpg" alt="VR Game Cafe — Product Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Product Shoot</span><span class="m-cap-title">VR Game Cafe</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="product-shoot" data-type="video"
+        data-title="Waffle" data-cat-label="Product Shoot"
+        data-desc="Scroll-stopping product films — food, jewellery, and lifestyle shot with controlled lighting and motion built for conversion."
+        data-video="assets/portfolio/product-shoot-vid-05-web.mp4" data-poster="assets/portfolio/product-shoot-vid-05.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/product-shoot-vid-05.jpg" alt="Waffle — Product Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Product Shoot</span><span class="m-cap-title">Waffle</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="model-shoot" data-type="video"
+        data-title="Actor Maddy" data-cat-label="Model Shoot"
+        data-desc="Cinematic model and talent films with dramatic lighting, styling direction, and premium colour grading."
+        data-video="assets/portfolio/model-shoot-vid-01-web.mp4" data-poster="assets/portfolio/model-shoot-vid-01.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/model-shoot-vid-01.jpg" alt="Actor Maddy — Model Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Model Shoot</span><span class="m-cap-title">Actor Maddy</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="model-shoot" data-type="video"
+        data-title="Actor Madhavan" data-cat-label="Model Shoot"
+        data-desc="Cinematic model and talent films with dramatic lighting, styling direction, and premium colour grading."
+        data-video="assets/portfolio/model-shoot-vid-02-web.mp4" data-poster="assets/portfolio/model-shoot-vid-02.jpg"
+        style="aspect-ratio:1080/1920">
+        <img src="assets/portfolio/model-shoot-vid-02.jpg" alt="Actor Madhavan — Model Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Model Shoot</span><span class="m-cap-title">Actor Madhavan</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="textile-shoot" data-type="video"
+        data-title="Video 1" data-cat-label="Textile Shoot"
+        data-desc="Fabric and apparel storytelling — texture, drape, and detail captured to make collections feel premium."
+        data-video="assets/portfolio/textile-shoot-vid-01-web.mp4" data-poster="assets/portfolio/textile-shoot-vid-01.jpg"
+        style="aspect-ratio:720/1280">
+        <img src="assets/portfolio/textile-shoot-vid-01.jpg" alt="Video 1 — Textile Shoot by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Textile Shoot</span><span class="m-cap-title">Video 1</span></figcaption>
+      </figure>
+      <figure class="m-tile" data-category="long-form" data-type="video"
+        data-title="Khayti Reels Video" data-cat-label="Long Form"
+        data-desc="Long-form brand films and reels edited to hold attention and carry a complete narrative."
+        data-video="assets/portfolio/long-form-vid-01-web.mp4" data-poster="assets/portfolio/long-form-vid-01.jpg"
+        style="aspect-ratio:3840/2160">
+        <img src="assets/portfolio/long-form-vid-01.jpg" alt="Khayti Reels Video — Long Form by DotMov" loading="lazy">
+        <span class="m-play" aria-hidden="true"></span>
+        <figcaption class="m-cap"><span class="m-cap-cat">Long Form</span><span class="m-cap-title">Khayti Reels Video</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -421,5 +836,77 @@
 
 </footer>
 <script src="js/main.js"></script>
+
+<script>
+/* ── Masonry gallery: filter + image/video lightbox ── */
+(function(){
+  var chips = document.querySelectorAll('.work-filters .filter-chip');
+  var tiles = document.querySelectorAll('.m-tile');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var f = chip.dataset.filter;
+      tiles.forEach(function(t){
+        t.style.display = (f === 'all' || t.dataset.category === f) ? '' : 'none';
+      });
+    });
+  });
+
+  var lb     = document.getElementById('lightbox');
+  var card   = document.getElementById('lightboxCard');
+  var wrap   = document.getElementById('lightboxMediaWrap');
+  var elCat   = document.getElementById('lightboxCategory');
+  var elTitle = document.getElementById('lightboxTitle');
+  var elDesc  = document.getElementById('lightboxDesc');
+  var closeBtn = document.getElementById('lightboxClose');
+  if(!lb) return;
+
+  function open(tile){
+    wrap.innerHTML = '';
+    var isVideo = tile.dataset.type === 'video';
+    if(isVideo){
+      var v = document.createElement('video');
+      v.className = 'lightbox-media is-video';
+      v.src = tile.dataset.video; v.poster = tile.dataset.poster;
+      v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'metadata';
+      // graceful fallback to poster if web video missing (e.g. not uploaded to CDN)
+      v.addEventListener('error', function(){
+        wrap.innerHTML = '';
+        var im = document.createElement('img');
+        im.className = 'lightbox-media'; im.src = tile.dataset.poster; im.alt = tile.dataset.title;
+        wrap.appendChild(im);
+      });
+      wrap.appendChild(v);
+    } else {
+      var im = document.createElement('img');
+      im.className = 'lightbox-media'; im.src = tile.dataset.img; im.alt = tile.dataset.title;
+      wrap.appendChild(im);
+    }
+    var hasText = (tile.dataset.type === 'video');
+    card.classList.toggle('media-only', !hasText);
+    elCat.textContent   = tile.dataset.catLabel || '';
+    elTitle.textContent = tile.dataset.title || '';
+    elDesc.textContent  = tile.dataset.desc || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(closeBtn) closeBtn.focus();
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    var v = wrap.querySelector('video'); if(v){ v.pause(); }
+    setTimeout(function(){ wrap.innerHTML=''; }, 300);
+  }
+  tiles.forEach(function(t){
+    t.setAttribute('tabindex','0'); t.setAttribute('role','button');
+    t.addEventListener('click', function(){ open(t); });
+    t.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(t); } });
+  });
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
 </body>
 </html>
