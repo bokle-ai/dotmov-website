@@ -1292,11 +1292,32 @@
     if (igOpen) { igOpen.style.opacity = ''; igOpen.style.transform = ''; }
   }
 
+  // Mobile: reveal each phone (with its chip + quote) on scroll-in
+  var mobileObs = null;
+  function teardownMobileReveal() {
+    if (mobileObs) { mobileObs.disconnect(); mobileObs = null; }
+    phones.forEach(function (p) { p.classList.remove('is-in'); });
+  }
+  function setupMobileReveal() {
+    teardownMobileReveal();
+    if (reduceMQ.matches || !('IntersectionObserver' in window)) {
+      phones.forEach(function (p) { p.classList.add('is-in'); });
+      return;
+    }
+    mobileObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); mobileObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.25, rootMargin: '0px 0px -12% 0px' });
+    phones.forEach(function (p) { mobileObs.observe(p); });
+  }
+
   function init() {
     var newMode = mobileMQ.matches ? 'mobile' : (reduceMQ.matches ? 'reduced' : 'scrub');
     if (newMode === mode) { if (mode === 'scrub') { measure(); onScroll(); } return; }
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onResize);
+    teardownMobileReveal();
     sec.classList.remove('cs-mode-scrub', 'cs-mode-mobile', 'cs-mode-reduced');
     mode = newMode;
     sec.classList.add('cs-mode-' + mode);
@@ -1304,6 +1325,7 @@
     if (mode === 'mobile') {
       clearInline();
       quotes.forEach(function (q, i) { q.classList.toggle('is-active', i === 0); });
+      setupMobileReveal();
     } else if (mode === 'reduced') {
       measure();
       apply(1);              // show final triangle, statically
