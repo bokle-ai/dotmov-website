@@ -881,6 +881,7 @@ em {
 .celeb-strip-wrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;          /* horizontal swipes scroll the strip; vertical swipes scroll the page */
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   cursor: grab;
@@ -1881,6 +1882,12 @@ em {
   gap: 0.25rem;
 }
 .pricing-card.featured .pricing-price { color: var(--navy); }
+/* Price hidden — show a "custom quote" line instead, smaller than a price */
+.pricing-price--quote {
+  font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+  letter-spacing: -0.01em;
+  display: block;
+}
 .pricing-price-sym {
   font-size: 0.55em;
   margin-top: 0.25em;

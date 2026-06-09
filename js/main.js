@@ -212,14 +212,10 @@
       }
     }
 
-    // Wheel event: translate vertical scroll to horizontal
-    celebStrip.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // already horizontal
-      e.preventDefault();
-      celebStrip.scrollLeft += e.deltaY * 1.2;
-    }, { passive: false });
+    // NOTE: no wheel hijack — vertical scroll must always scroll the page.
+    // Horizontal scrolling of the strip is native (overflow-x) + mouse drag below.
 
-    // Drag support
+    // Drag support (desktop only — does not block page scroll)
     let isDragging  = false;
     let dragStartX  = 0;
     let scrollStart = 0;
@@ -245,19 +241,9 @@
       celebStrip.style.userSelect = '';
     });
 
-    // Touch drag support
-    let touchStartX  = 0;
-    let touchScrollStart = 0;
-
-    celebStrip.addEventListener('touchstart', (e) => {
-      touchStartX      = e.touches[0].pageX;
-      touchScrollStart = celebStrip.scrollLeft;
-    }, { passive: true });
-
-    celebStrip.addEventListener('touchmove', (e) => {
-      const dx = e.touches[0].pageX - touchStartX;
-      celebStrip.scrollLeft = touchScrollStart - dx;
-    }, { passive: true });
+    // Touch: rely on native overflow-x scrolling (touch-action: pan-x in CSS),
+    // which lets vertical swipes scroll the page while horizontal swipes scroll
+    // the strip — no custom touchmove handler that would fight the page.
 
     celebStrip.addEventListener('scroll', updateCelebUI, { passive: true });
     updateCelebUI(); // initialise
