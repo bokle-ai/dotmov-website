@@ -509,6 +509,17 @@
     });
   }
 
+  // Why cards — mouse-follow spotlight glow
+  if (!reducedMotion) {
+    whyCards.forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+        card.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+      });
+    });
+  }
+
   // ── Methodology Tab Switcher ───────────────────────────────────
   const methodTabBtns  = document.querySelectorAll('.method-tab-btn');
   const methodPanels   = document.querySelectorAll('.method-panel');
