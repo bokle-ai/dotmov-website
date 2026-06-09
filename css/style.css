@@ -246,6 +246,28 @@ em {
 }
 .btn-ghost:hover .btn-arrow { transform: translateX(4px); }
 
+/* Prominent outline CTA — clearly a button; secondary to the gold fill */
+.btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
+  padding: 15px 28px;
+  border-radius: 0;
+  font-family: var(--font-sans); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.02em;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.4s var(--ease-out-expo);
+}
+.btn-outline:hover { background: var(--gold); color: var(--ink); box-shadow: 0 12px 30px -12px var(--gold); }
+.btn-outline .btn-arrow { transition: transform 0.4s var(--ease-out-expo); display: inline-block; }
+.btn-outline:hover .btn-arrow { transform: translateX(5px); }
+
+/* Full-width button modifier */
+.btn-block { display: flex; width: 100%; justify-content: center; }
+
+/* Give the gold primary a little lift so it reads as the main action */
+.btn-primary:hover { box-shadow: 0 14px 32px -12px var(--gold); transform: translateY(-1px); }
+
 /* Legacy button classes mapped to new system for inner pages */
 .btn {
   display: inline-flex;
@@ -1985,11 +2007,17 @@ em {
 }
 .pricing-card.featured .pricing-best-for { color: var(--text-on-light-mut); border-top-color: var(--line-light); }
 
-.pricing-card .btn-ghost {
-  color: var(--text-on-dark);
-  border-bottom-color: rgba(247,245,240,0.4);
+/* Pricing CTAs: full-width, bottom-anchored, prominent buttons */
+.pricing-card .btn-primary,
+.pricing-card .btn-outline {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-weight: 600;
 }
-.pricing-card.featured .btn-ghost { color: var(--text-on-light); border-bottom-color: rgba(10,10,11,0.4); }
+.pricing-card .pricing-features { margin-bottom: 1.75rem; }
 
 /* ── (09) Testimonials ───────────────────────────────────────── */
 .testimonials-section {
