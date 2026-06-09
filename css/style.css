@@ -2941,51 +2941,43 @@ select.form-control {
 /* Per-phone mobile quote — only shown in stacked mobile mode */
 .cs-mq { display: none; }
 
-/* Reduced-motion: static final triangle (JS applies end transforms) */
+/* Reduced-motion: no pin, no scrub — phones stacked vertically, all visible */
+.cs-mode-reduced.cs-scroll { height: auto; }
+.cs-mode-reduced .cs-sticky { position: static; height: auto; min-height: 0; display: block; overflow: visible; }
+.cs-mode-reduced .cs-inner  { display: block; padding: var(--section-pad-y, 4.5rem) 0; height: auto; }
+.cs-mode-reduced .cs-head   { transform: none !important; margin-bottom: 2.5rem; }
+.cs-mode-reduced .cs-stage  { position: static; }
+.cs-mode-reduced .cs-phones { position: static; display: flex; flex-direction: column; align-items: center; gap: 3.5rem; }
+.cs-mode-reduced .cs-phone  { position: relative !important; left: auto; top: auto; transform: none !important; opacity: 1 !important; display: flex; flex-direction: column; align-items: center; }
+.cs-mode-reduced .cs-phone .phone-frame { width: 240px; }
 .cs-mode-reduced .ig-open { display: none; }
+.cs-mode-reduced .cs-chip { position: relative !important; left: auto !important; right: auto !important; bottom: auto !important; transform: none !important; opacity: 1 !important; margin-top: 1.2rem; flex-direction: row; gap: .5rem; align-items: center !important; }
+.cs-mode-reduced .cs-chip-lbl, .cs-mode-reduced .cs-chip-name { margin-top: 0; }
+.cs-mode-reduced .cs-mq { display: block; max-width: 340px; margin: 1rem auto 0; text-align: center; font-family: var(--font-display, serif); font-style: italic; font-size: 1rem; line-height: 1.5; color: #fff; }
+.cs-mode-reduced .cs-mq cite { display: block; margin-top: .6rem; font-style: normal; font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: var(--gold, #e8b45a); }
+.cs-mode-reduced .cs-quotes, .cs-mode-reduced .cs-dots { display: none; }
 
-/* ── Mobile / small screens: drop the pin, stack vertically ── */
+/* ── Mobile: keep the pinned scroll-scrub; phones run as a serial conveyor ── */
 @media (max-width: 820px) {
-  .cs-scroll { height: auto; }
-  .cs-sticky { position: static; height: auto; min-height: 0; display: block; overflow: visible; }
-  .cs-inner  { display: block; padding: var(--section-pad-y, 4.5rem) 0; height: auto; }
-  .cs-head   { margin-bottom: 2.5rem; transform: none !important; }
-  .cs-stage  { position: static; }
-  .cs-phones { position: static; display: flex; flex-direction: column; align-items: center; gap: 3.5rem; }
-  .cs-phone  {
-    position: relative !important; left: auto; top: auto;
-    display: flex; flex-direction: column; align-items: center;
-    opacity: 0; transform: translateY(48px) scale(.93);
-    transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
-    will-change: opacity, transform;
+  .cs-inner  { padding-top: clamp(1.25rem, 5vh, 3rem); padding-bottom: clamp(1rem, 3vh, 2rem); }
+  .cs-head h2 { font-size: clamp(1.5rem, 6.5vw, 2rem); }
+  .cs-head p  { font-size: .88rem; max-width: 30ch; margin-left: auto; margin-right: auto; }
+  .cs-phone .phone-frame { width: clamp(158px, 44vw, 200px); }
+  /* chip centered just under whichever phone is on screen */
+  .cs-chip,
+  .cs-phone--0 .cs-chip {
+    left: 50%; right: auto; top: auto; bottom: -14px;
+    transform: translateX(-50%);
+    flex-direction: row; gap: .45rem; align-items: center;
+    padding: .45rem .8rem; font-size: .9em;
   }
-  .cs-phone.is-in { opacity: 1; transform: none; }
-  .cs-phone .phone-frame { width: 240px; }
-  .ig-open { display: none; }
-  .cs-chip {
-    position: relative; left: auto !important; right: auto !important; bottom: auto !important;
-    margin-top: 1.4rem; flex-direction: row; gap: .6rem; align-items: center !important;
-    opacity: 0; transform: translateY(14px);
-    transition: opacity .6s ease .18s, transform .6s ease .18s;
-  }
-  .cs-phone.is-in .cs-chip { opacity: 1; transform: none; }
   .cs-chip-lbl, .cs-chip-name { margin-top: 0; }
-  .cs-mq {
-    display: block; max-width: 340px; margin: 1.1rem auto 0; text-align: center;
-    font-family: var(--font-display, serif); font-style: italic; font-size: 1rem; line-height: 1.5; color: #fff;
-    opacity: 0; transform: translateY(14px);
-    transition: opacity .6s ease .3s, transform .6s ease .3s;
-  }
-  .cs-phone.is-in .cs-mq { opacity: 1; transform: none; }
-  .cs-mq cite { display: block; margin-top: .7rem; font-style: normal; font-size: .66rem; font-weight: 700; letter-spacing: .1em; color: var(--gold, #e8b45a); }
-  .cs-footer { margin-top: 3rem; }
-  .cs-quotes { display: none; }   /* per-phone quotes used instead */
-  .cs-dots { display: none; }
-}
-@media (prefers-reduced-motion: reduce) and (max-width: 820px) {
-  .cs-phone, .cs-phone .cs-chip, .cs-phone .cs-mq {
-    opacity: 1 !important; transform: none !important; transition: none !important;
-  }
+  .cs-mq { display: none; }            /* the cross-fading quote is used instead */
+  .cs-quotes { display: block; min-height: 9.5em; }   /* tall enough for 4-line quotes */
+  .cs-dots { display: flex; }
+  .cs-quote { font-size: .92rem; line-height: 1.45; }
+  .cs-quote cite { margin-top: .6rem; }
+  .cs-footer { padding-top: .25rem; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
