@@ -82,31 +82,28 @@
 ════════════════════════════════════════════════════════════════ -->
 <section class="hero" id="home" aria-label="DotMov, Video Production Studio">
 
-  <video class="hero-video" autoplay muted loop playsinline
-         poster="assets/hero/poster.jpg"
-         aria-label="DotMov showreel, cinematic video production in Chennai">
-    <source src="assets/hero/showreel.mp4" type="video/mp4">
-  </video>
+  <!-- Floating geometric shapes -->
+  <div class="hero-shapes" aria-hidden="true">
+    <div class="hero-shape hs-1"><div class="hero-shape-rot"><div class="hero-shape-fill"></div></div></div>
+    <div class="hero-shape hs-2"><div class="hero-shape-rot"><div class="hero-shape-fill"></div></div></div>
+    <div class="hero-shape hs-3"><div class="hero-shape-rot"><div class="hero-shape-fill"></div></div></div>
+    <div class="hero-shape hs-4"><div class="hero-shape-rot"><div class="hero-shape-fill"></div></div></div>
+    <div class="hero-shape hs-5"><div class="hero-shape-rot"><div class="hero-shape-fill"></div></div></div>
+  </div>
 
-  <!-- Gradient overlay -->
-  <div class="hero-overlay" aria-hidden="true"></div>
-
-  <!-- Film grain SVG texture -->
-  <svg class="hero-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#grain)"/>
-  </svg>
+  <!-- Soft brand glows + bottom vignette -->
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
 
   <!-- Content -->
   <div class="hero-content-wrap">
     <div class="container">
       <div class="hero-content">
 
-        <!-- Section label -->
-        
+        <span class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          Chennai Video Production Studio
+        </span>
 
         <!-- Headline: word-by-word reveal driven by JS -->
         <h1 class="hero-headline" id="heroHeadline" aria-label="Your competitors are posting. You should be closing.">
