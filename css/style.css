@@ -535,31 +535,9 @@ em {
   background: linear-gradient(180deg, rgba(6,6,6,.55) 0%, transparent 28%, transparent 60%, rgba(6,6,6,.85) 100%);
 }
 
-/* Hero badge pill */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: .55rem;
-  padding: .42rem .9rem .42rem .8rem; margin-bottom: 1.9rem;
-  border: 1px solid rgba(255,255,255,.12); border-radius: 999px;
-  background: rgba(255,255,255,.04); backdrop-filter: blur(6px);
-  font-family: var(--font-mono, monospace);
-  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(247,245,240,.72);
-  opacity: 0; animation: heroFadeUp .8s var(--ease-out-expo) .1s forwards;
-}
-.hero-badge-dot {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
-  box-shadow: 0 0 0 0 rgba(232,180,90,.55); animation: heroDotPulse 2.4s ease-out infinite;
-}
-@keyframes heroDotPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(232,180,90,.5); }
-  70%  { box-shadow: 0 0 0 7px rgba(232,180,90,0); }
-  100% { box-shadow: 0 0 0 0 rgba(232,180,90,0); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-shape { opacity: 1; animation: none; }
   .hero-shape-fill { animation: none; }
-  .hero-badge-dot { animation: none; }
 }
 
 /* Smaller, less crowding shapes on phones */
@@ -569,7 +547,6 @@ em {
   .hs-3 { --w: 170px; --h: 52px; }
   .hs-4 { --w: 120px; --h: 38px; }
   .hs-5 { --w: 100px; --h: 32px; }
-  .hero-badge { font-size: .62rem; letter-spacing: .1em; }
 }
 
 /* Content layer */
@@ -749,17 +726,6 @@ em {
   overflow: hidden;
 }
 
-.logos-eyebrow {
-  text-align: center;
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #5f5f67;          /* was #9b9ba3 — 2.8:1; now ~5:1 on cream (WCAG AA) */
-  margin: 0 auto 2.25rem;
-  max-width: 100%;         /* override global p { max-width: 68ch } */
-  padding: 0 var(--gutter);
-}
 
 /* Scrolling container — very gentle fade at edges, no cropping */
 .logos-track-wrap {
