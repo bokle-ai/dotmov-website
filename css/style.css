@@ -3160,8 +3160,32 @@ select.form-control {
   .cs-inner  { padding-top: clamp(.75rem, 3.5svh, 2.5rem); padding-bottom: clamp(.5rem, 2svh, 1.5rem); }
   .cs-head h2 { font-size: clamp(1.35rem, 5.5vw, 1.85rem); }
   .cs-head p  { font-size: .82rem; max-width: 30ch; margin-left: auto; margin-right: auto; }
-  /* Phone frame: narrower so it fits within the viewport height */
-  .cs-phone .phone-frame { width: clamp(140px, 38vw, 172px); }
+
+  /* ── Phone frame: scale everything down proportionally ── */
+  .cs-phone .phone-frame {
+    width: clamp(140px, 38vw, 172px);
+    border-radius: clamp(24px, 6.5vw, 32px);
+    padding: 9px 7px 11px;
+  }
+  /* Screen corners scale with frame */
+  .cs-phone .phone-screen { border-radius: clamp(18px, 5vw, 26px); }
+
+  /* Dynamic island: proportional width, smaller height */
+  .cs-phone .phone-dynamic-island {
+    width: clamp(52px, 14vw, 70px);
+    height: clamp(14px, 3.5vw, 20px);
+    top: 13px;
+    border-radius: 10px;
+  }
+
+  /* Side buttons: shift up to match smaller frame */
+  .cs-phone .phone-side-vol-up { top: 58px;  height: 22px; }
+  .cs-phone .phone-side-vol-dn { top: 90px;  height: 22px; }
+  .cs-phone .phone-side-power  { top: 64px;  height: 34px; }
+
+  /* Home bar: narrower */
+  .cs-phone .phone-home-bar { width: 64px; margin-top: 6px; }
+
   /* Chip: inline row under the phone */
   .cs-chip,
   .cs-phone--0 .cs-chip {
@@ -3173,6 +3197,7 @@ select.form-control {
   }
   .cs-chip-lbl, .cs-chip-name { margin-top: 0; }
   .cs-mq { display: none; }
+
   /* Quote area: shorter min-height so it doesn't over-reserve space */
   .cs-quotes { display: block; min-height: 7em; }
   .cs-dots { display: flex; }
@@ -3183,7 +3208,17 @@ select.form-control {
 
 /* Extra-small phones (SE, Fold outer) */
 @media (max-width: 390px) {
-  .cs-phone .phone-frame { width: clamp(128px, 34vw, 150px); }
+  .cs-phone .phone-frame {
+    width: clamp(120px, 32vw, 140px);
+    border-radius: clamp(20px, 5.5vw, 26px);
+    padding: 8px 6px 10px;
+  }
+  .cs-phone .phone-screen { border-radius: clamp(16px, 4.5vw, 22px); }
+  .cs-phone .phone-dynamic-island { width: clamp(44px, 12vw, 58px); height: 14px; top: 11px; }
+  .cs-phone .phone-side-vol-up { top: 50px; height: 18px; }
+  .cs-phone .phone-side-vol-dn { top: 76px; height: 18px; }
+  .cs-phone .phone-side-power  { top: 56px; height: 28px; }
+  .cs-phone .phone-home-bar { width: 54px; }
   .cs-head h2 { font-size: 1.2rem; }
   .cs-quotes { min-height: 6em; }
 }
