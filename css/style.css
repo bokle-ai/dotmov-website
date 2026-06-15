@@ -3157,9 +3157,10 @@ select.form-control {
 
 /* ── Mobile: pinned, phones serial conveyor ── */
 @media (max-width: 820px) {
-  .cs-inner  { padding-top: clamp(.75rem, 3.5svh, 2.5rem); padding-bottom: clamp(.5rem, 2svh, 1.5rem); }
-  .cs-head h2 { font-size: clamp(1.35rem, 5.5vw, 1.85rem); }
-  .cs-head p  { font-size: .82rem; max-width: 30ch; margin-left: auto; margin-right: auto; }
+  /* navbar is fixed 64px when scrolled — must clear it */
+  .cs-inner  { padding-top: clamp(4.5rem, 11svh, 6rem); padding-bottom: clamp(.5rem, 2svh, 1.5rem); }
+  .cs-head h2 { font-size: clamp(1.2rem, 4.8vw, 1.6rem); margin-bottom: .35rem; }
+  .cs-head p  { font-size: .78rem; max-width: 28ch; margin-left: auto; margin-right: auto; margin-bottom: 0; }
 
   /* ── Phone frame: scale everything down proportionally ── */
   .cs-phone .phone-frame {
