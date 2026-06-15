@@ -520,26 +520,58 @@
     });
   }
 
-  // ── Methodology Tab Switcher ───────────────────────────────────
-  const methodTabBtns  = document.querySelectorAll('.method-tab-btn');
-  const methodPanels   = document.querySelectorAll('.method-panel');
-  if (methodTabBtns.length && methodPanels.length) {
-    methodTabBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const step = btn.dataset.step;
-        // Update buttons
-        methodTabBtns.forEach((b) => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        // Update panels
-        methodPanels.forEach((panel) => panel.classList.remove('active'));
-        const target = document.getElementById(`mp-${step}`);
-        if (target) target.classList.add('active');
+  // ── Method v2 — Cinema Accordion ──────────────────────────────
+  const mv2Cards = document.querySelectorAll('.mv2-card');
+  const mv2Dots  = document.querySelectorAll('.mv2-dot');
+  const mv2Count = document.querySelector('.mv2-step-count');
+  const MV2_DUR  = 5000;
+  let mv2Active  = 0;
+  let mv2Timer   = null;
+
+  function mv2Activate(idx) {
+    mv2Cards.forEach((c, i) => c.classList.toggle('active', i === idx));
+    mv2Dots.forEach((d, i) => {
+      d.classList.remove('active');
+    });
+    // force reflow so animation restarts cleanly
+    void document.body.offsetWidth;
+    if (mv2Dots[idx]) mv2Dots[idx].classList.add('active');
+    if (mv2Count) {
+      const n = idx + 1;
+      const t = mv2Cards.length;
+      mv2Count.textContent = `0${n} / 0${t}`;
+    }
+    mv2Active = idx;
+  }
+
+  function mv2Next() {
+    mv2Activate((mv2Active + 1) % mv2Cards.length);
+  }
+
+  function mv2StartTimer() {
+    mv2StopTimer();
+    mv2Timer = setInterval(mv2Next, MV2_DUR);
+  }
+
+  function mv2StopTimer() {
+    if (mv2Timer) { clearInterval(mv2Timer); mv2Timer = null; }
+  }
+
+  if (mv2Cards.length) {
+    mv2Cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        if (i !== mv2Active) { mv2Activate(i); mv2StartTimer(); }
       });
     });
+    mv2Dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { mv2Activate(i); mv2StartTimer(); });
+    });
+    const mv2Track = document.querySelector('.mv2-track');
+    if (mv2Track) {
+      mv2Track.addEventListener('mouseenter', mv2StopTimer);
+      mv2Track.addEventListener('mouseleave', mv2StartTimer);
+    }
+    mv2StartTimer();
   }
 
   // ── Testimonial Block Reveals ──────────────────────────────────
