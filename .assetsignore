@@ -1,0 +1,12 @@
+# Files NOT part of the published site — keep Cloudflare Workers assets clean
+# (fixes "Asset too large" from the 186 MiB .git pack being uploaded)
+.git
+.gitignore
+.assetsignore
+.claude
+node_modules
+scripts
+Image.assets
+*.md
+wrangler.jsonc
+wrangler.toml
