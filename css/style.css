@@ -3396,9 +3396,9 @@ select.form-control {
   font-size: .8rem; font-weight: 700; letter-spacing: .08em;
   color: var(--gold, #e8b45a);
 }
-.cs-dots { display: flex; gap: .5rem; justify-content: center; margin: 1.1rem 0 .9rem; }
-.cs-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.25); transition: background .3s, transform .3s; }
-.cs-dot.is-active { background: var(--gold, #e8b45a); transform: scale(1.25); }
+.cs-dots { display: flex; gap: .85rem; justify-content: center; align-items: center; margin: 1.4rem 0 1.1rem; }
+.cs-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.28); flex-shrink: 0; transition: background .3s, transform .3s, width .3s; }
+.cs-dot.is-active { background: var(--gold, #e8b45a); transform: scale(1.15); box-shadow: 0 0 10px rgba(212,166,66,.5); }
 .cs-cta { display: inline-flex; }
 
 /* Per-phone mobile quote — only shown in stacked mobile mode */

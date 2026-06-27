@@ -524,7 +524,7 @@
   const mv2Cards = document.querySelectorAll('.mv2-card');
   const mv2Dots  = document.querySelectorAll('.mv2-dot');
   const mv2Count = document.querySelector('.mv2-step-count');
-  const MV2_DUR  = 5000;
+  const MV2_DUR  = 7000;
   let mv2Active  = 0;
   let mv2Timer   = null;
 
@@ -856,4 +856,28 @@
     });
   });
 
+})();
+
+/* ── Force muted videos to autoplay (iOS Low-Power Mode shows a play button
+      and blocks autoplay even when muted — a user gesture re-enables it) ── */
+(function () {
+  function kick() {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) {
+      v.muted = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    });
+  }
+  if (document.readyState !== 'loading') kick();
+  else document.addEventListener('DOMContentLoaded', kick);
+  window.addEventListener('load', kick);
+  // first interaction unlocks playback in Low-Power Mode
+  ['touchstart', 'click', 'scroll'].forEach(function (ev) {
+    window.addEventListener(ev, function once() {
+      kick();
+      ['touchstart', 'click', 'scroll'].forEach(function (e2) {
+        window.removeEventListener(e2, once);
+      });
+    }, { passive: true, once: false });
+  });
 })();

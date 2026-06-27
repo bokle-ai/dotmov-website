@@ -82,6 +82,17 @@
     .m-play::after { content:""; display:block; width:0; height:0;
       border-style:solid; border-width:9px 0 9px 15px; border-color: transparent transparent transparent #fff; margin-left:3px; }
     .m-tile:hover .m-play::after { border-left-color:#0a0a0a; }
+    /* autoplaying video preview inside a grid tile */
+    .m-tile-vid {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; display:block; z-index:1;
+      opacity:0; transition:opacity .45s ease; pointer-events:none;
+    }
+    .m-tile.is-playing .m-tile-vid { opacity:1; }
+    .m-tile.is-playing .m-play { opacity:0; }
+    .m-tile .m-cap, .m-tile .m-play { z-index:2; }
+    .m-play { transition: background .25s, transform .25s, opacity .25s; }
+
     /* video-capable lightbox */
     .lightbox-media { width:100%; max-height:78vh; display:block; background:#000; }
     .lightbox-media.is-video { aspect-ratio:auto; }
@@ -869,7 +880,9 @@
       var v = document.createElement('video');
       v.className = 'lightbox-media is-video';
       v.src = tile.dataset.video; v.poster = tile.dataset.poster;
-      v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'metadata';
+      v.controls = true; v.autoplay = true; v.playsInline = true; v.loop = true; v.preload = 'metadata';
+      // user opened it via a click → try to play with sound, fall back to muted
+      var pr = v.play(); if (pr && pr.catch) pr.catch(function(){ v.muted = true; v.play().catch(function(){}); });
       // graceful fallback to poster if web video missing (e.g. not uploaded to CDN)
       v.addEventListener('error', function(){
         wrap.innerHTML = '';
@@ -906,6 +919,42 @@
   if(closeBtn) closeBtn.addEventListener('click', close);
   lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+
+/* ── Autoplaying video previews in the portfolio grid ──
+   Lazy: a tile only loads + plays its clip while it is on screen, and pauses
+   when it scrolls away — keeps mobile fast even with many video tiles. */
+(function(){
+  var tiles = [].slice.call(document.querySelectorAll('.m-tile[data-type="video"]'));
+  if(!tiles.length) return;
+  tiles.forEach(function(tile){
+    var v = document.createElement('video');
+    v.className = 'm-tile-vid';
+    v.muted = true; v.loop = true; v.playsInline = true;
+    v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.preload = 'none';
+    if(tile.dataset.poster) v.poster = tile.dataset.poster;
+    var cap = tile.querySelector('.m-cap');
+    tile.insertBefore(v, cap || null);
+    tile._vid = v;
+  });
+  if(!('IntersectionObserver' in window)){
+    // no observer support → just play everything
+    tiles.forEach(function(t){ t._vid.src = t.dataset.video; t._vid.play().then(function(){t.classList.add('is-playing');}).catch(function(){}); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var t = e.target, v = t._vid;
+      if(e.isIntersecting){
+        if(!v.getAttribute('src')) v.src = t.dataset.video;
+        var p = v.play();
+        if(p && p.then) p.then(function(){ t.classList.add('is-playing'); }).catch(function(){});
+      } else {
+        v.pause(); t.classList.remove('is-playing');
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '0px 0px 80px 0px' });
+  tiles.forEach(function(t){ io.observe(t); });
 })();
 </script>
 </body>
