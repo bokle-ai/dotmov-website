@@ -6,3 +6,10 @@ node_modules/
 *-web.mp4
 # portfolio web videos ARE committed so they play on the live site
 !assets/portfolio/*-web.mp4
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
